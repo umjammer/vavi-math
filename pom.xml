@@ -12,7 +12,7 @@
     <name></name>
   </organization>
   <version>0.0.1</version>
-  <url>http://www.vavisoft.com/</url>
+  <url>https://github.com/umjammer/vavi-math</url>
   <description></description>
   <distributionManagement>
       <repository>
@@ -61,6 +61,7 @@
           <target>1.8</target>
           <encoding>UTF-8</encoding>
         </configuration>
+        <version>3.3</version>
       </plugin>
     </plugins>
   </build>
@@ -85,4 +86,7 @@
     <!-- github server corresponds to entry in ~/.m2/settings.xml -->
     <github.global.server>github</github.global.server>
   </properties>
+  <scm>
+    <url>https://github.com/umjammer/vavi-math</url>
+  </scm>
 </project>

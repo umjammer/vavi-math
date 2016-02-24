@@ -40,7 +40,11 @@ public abstract class StringUtil {
     public static String toSubscript(int i) {
         StringBuilder sb = new StringBuilder();
         for (char c : String.valueOf(i).toCharArray()) {
-            sb.append(Character.isDigit(c) ? subscriptMap.get(c) : c);
+            if (Character.isDigit(c)) {
+                sb.append(subscriptMap.get(c));
+            } else {
+                sb.append(c);
+            }
         }
         return sb.toString();
     }
