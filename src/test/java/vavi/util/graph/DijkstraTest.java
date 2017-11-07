@@ -1,6 +1,5 @@
 /*
  * Copyright (c) 2013 by Naohide Sano, All rights reserved.
- * Copyright (c) 2013 by KLab Inc., All rights reserved.
  *
  * Programmed by Naohide Sano
  */
@@ -19,8 +18,6 @@ import static org.junit.Assert.fail;
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2013/02/12 umjammer initial version <br>
- * @author <a href="mailto:sano-n@klab.jp">Naohide Sano</a> (sano-n)
- * @version 0.00 2013/02/12 sano-n initial version <br>
  */
 public class DijkstraTest {
 
@@ -31,16 +28,16 @@ public class DijkstraTest {
 
     /** */
     public static void main(String[] args) throws Exception {
-        Vertex<Character> A = new Vertex<Character>('A');
-        Vertex<Character> B = new Vertex<Character>('B');
-        Vertex<Character> C = new Vertex<Character>('C');
-        Vertex<Character> D = new Vertex<Character>('D');
-        Vertex<Character> E = new Vertex<Character>('E');
-        Vertex<Character> F = new Vertex<Character>('F');
-        Vertex<Character> G = new Vertex<Character>('G');
-        Vertex<Character> H = new Vertex<Character>('H');
+        Vertex<Character> A = new Vertex<>('A');
+        Vertex<Character> B = new Vertex<>('B');
+        Vertex<Character> C = new Vertex<>('C');
+        Vertex<Character> D = new Vertex<>('D');
+        Vertex<Character> E = new Vertex<>('E');
+        Vertex<Character> F = new Vertex<>('F');
+        Vertex<Character> G = new Vertex<>('G');
+        Vertex<Character> H = new Vertex<>('H');
 
-        Graph<Character> graph = new Graph<Character>();
+        Graph<Character> graph = new Graph<>();
         graph.setVisitor(new GraphVisitor<Character>() {
             @Override
             public void atNode(Vertex<Character> vertex) {
@@ -69,7 +66,7 @@ public class DijkstraTest {
         graph.addEdge(G, F, 10);
         graph.addEdge(F, D, 20);
 
-        new Dijkstra<Character>(graph).search();
+        new Dijkstra<>(graph).search();
     }
 }
 

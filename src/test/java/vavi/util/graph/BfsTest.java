@@ -29,29 +29,29 @@ public class BfsTest {
     }
 
     public static void main(String[] args) {
-        Vertex<Integer> V1 = new Vertex<Integer>(1);
-        Vertex<Integer> V2 = new Vertex<Integer>(2);
-        Vertex<Integer> V3 = new Vertex<Integer>(3);
-        Vertex<Integer> V4 = new Vertex<Integer>(4);
-        Vertex<Integer> V5 = new Vertex<Integer>(5);
-        Vertex<Integer> V6 = new Vertex<Integer>(6);
-        Vertex<Integer> V7 = new Vertex<Integer>(7);
-        Vertex<Integer> V8 = new Vertex<Integer>(8);
-        Vertex<Integer> V9 = new Vertex<Integer>(9);
-        Vertex<Integer> V10 = new Vertex<Integer>(10);
-        Vertex<Integer> V11 = new Vertex<Integer>(11);
-        Vertex<Integer> V12 = new Vertex<Integer>(12);
+        Vertex<Integer> V1 = new Vertex<>(1);
+        Vertex<Integer> V2 = new Vertex<>(2);
+        Vertex<Integer> V3 = new Vertex<>(3);
+        Vertex<Integer> V4 = new Vertex<>(4);
+        Vertex<Integer> V5 = new Vertex<>(5);
+        Vertex<Integer> V6 = new Vertex<>(6);
+        Vertex<Integer> V7 = new Vertex<>(7);
+        Vertex<Integer> V8 = new Vertex<>(8);
+        Vertex<Integer> V9 = new Vertex<>(9);
+        Vertex<Integer> V10 = new Vertex<>(10);
+        Vertex<Integer> V11 = new Vertex<>(11);
+        Vertex<Integer> V12 = new Vertex<>(12);
 
-        Graph<Integer> graph = new Graph<Integer>();
+        Graph<Integer> graph = new Graph<>();
         graph.setVisitor(new GraphVisitor<Integer>() {
-            List<Vertex<Integer>> parent = new ArrayList<Vertex<Integer>>(); 
+            List<Vertex<Integer>> parent = new ArrayList<>(); 
             @Override
             public void atNode(Vertex<Integer> vertex) {
                 parent.add(vertex);
             }
             @Override
             public void atEnd(List<Vertex<Integer>> vertexes) {
-                List<Vertex<Integer>> path = new ArrayList<Vertex<Integer>>();
+                List<Vertex<Integer>> path = new ArrayList<>();
                 Vertex<Integer> start = vertexes.get(0);
                 Vertex<Integer> end = vertexes.get(1);
 System.err.println("A: " + start + ", " + end);
@@ -105,7 +105,7 @@ System.err.println("B: " + parent.get(i) + ", " + b);
         
 //        System.err.println(graph);
 
-        Bfs<Integer> bfs = new Bfs<Integer>(graph);
+        Bfs<Integer> bfs = new Bfs<>(graph);
         bfs.setEnd(10);
         bfs.search(); // breadth-first search
     }

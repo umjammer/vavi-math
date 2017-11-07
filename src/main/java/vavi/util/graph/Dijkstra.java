@@ -5,7 +5,6 @@
 package vavi.util.graph;
 
 
-
 /**
  * Dijkstra.
  */

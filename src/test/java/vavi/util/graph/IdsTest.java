@@ -28,13 +28,13 @@ public class IdsTest {
 
     /** */
     public static void main(String[] args) {
-        Vertex<Character> A = new Vertex<Character>('A');
-        Vertex<Character> B = new Vertex<Character>('B');
-        Vertex<Character> C = new Vertex<Character>('C');
-        Vertex<Character> D = new Vertex<Character>('D');
-        Vertex<Character> E = new Vertex<Character>('E');
+        Vertex<Character> A = new Vertex<>('A');
+        Vertex<Character> B = new Vertex<>('B');
+        Vertex<Character> C = new Vertex<>('C');
+        Vertex<Character> D = new Vertex<>('D');
+        Vertex<Character> E = new Vertex<>('E');
 
-        Graph<Character> graph = new Graph<Character>();
+        Graph<Character> graph = new Graph<>();
         graph.setVisitor(new GraphVisitor<Character>() {
             @Override
             public void atNode(Vertex<Character> vertex) {
@@ -58,7 +58,7 @@ public class IdsTest {
 
         System.out.print("Visits: ");
         for (int i = 0; i < 4; i++) {
-            Ids<Character> ids = new Ids<Character>(graph);
+            Ids<Character> ids = new Ids<>(graph);
             ids.setLimit(i);
             ids.search(); // depth-first search
         }

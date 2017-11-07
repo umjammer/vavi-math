@@ -46,7 +46,7 @@ public class Rpn {
      * @param expr white space separation, ie. "1 2 +"
      */
     public double doubleValue(String expr) {
-        Deque<Double> stack = new ArrayDeque<Double>();
+        Deque<Double> stack = new ArrayDeque<>();
         Scanner scan = new Scanner(expr);
         while (scan.hasNext()) {
             if (scan.hasNextDouble()) {
@@ -88,7 +88,7 @@ public class Rpn {
      * @param expr is only int value accepted.
      */
     public Rational rationalValue(String expr) throws RationalException {
-        Deque<Rational> stack = new ArrayDeque<Rational>();
+        Deque<Rational> stack = new ArrayDeque<>();
         Scanner scan = new Scanner(expr);
         while (scan.hasNext()) {
             if (scan.hasNextInt()) {
@@ -129,7 +129,7 @@ public class Rpn {
     }
 
     /** not thread safe, for performance */
-    private Deque<Rational> stack = new ArrayDeque<Rational>();
+    private Deque<Rational> stack = new ArrayDeque<>();
 
     /**
      * @param expr is only Rational value, and char operator accepted.
@@ -181,7 +181,7 @@ public class Rpn {
      * not thread safe... 
      */
     public static char[][] generatePattern(int ops, int nums) {
-        List<char[]> result = new ArrayList<char[]>();
+        List<char[]> result = new ArrayList<>();
         generatePattern(ops, nums, "", result);
         return result.toArray(new char[result.size()][]);
     }
@@ -231,7 +231,7 @@ public class Rpn {
      */
     public static String toInfix(Object[] postfixTokens) {
         // Create stack for holding intermediate infix expressions
-        Deque<Intermediate> stack = new ArrayDeque<Intermediate>();
+        Deque<Intermediate> stack = new ArrayDeque<>();
 
         for (Object token : postfixTokens) {
             if (Op.class.isInstance(token)) {

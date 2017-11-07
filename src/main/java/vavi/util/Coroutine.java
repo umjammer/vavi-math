@@ -11,8 +11,8 @@ import java.util.Random;
 
 public class Coroutine {
 
-    private final ArrayList<Thread> pool = new ArrayList<Thread>();
-    private final HashMap<Thread, Integer> dict = new HashMap<Thread, Integer>();
+    private final ArrayList<Thread> pool = new ArrayList<>();
+    private final HashMap<Thread, Integer> dict = new HashMap<>();
     private final Random rand = new Random();
     private final Object mutex = new Object();
     private volatile int currentId;

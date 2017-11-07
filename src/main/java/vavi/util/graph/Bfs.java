@@ -14,7 +14,7 @@ import java.util.Queue;
 public class Bfs<T> implements Searchable {
 
     /** */
-    private Queue<Integer> queue = new LinkedList<Integer>();
+    private Queue<Integer> queue = new LinkedList<>();
 
     /** */
     private Graph<T> graph;

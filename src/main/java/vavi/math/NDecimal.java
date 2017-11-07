@@ -34,7 +34,7 @@ public class NDecimal {
             return "0";
         }
         
-        List<Integer> list = new ArrayList<Integer>();
+        List<Integer> list = new ArrayList<>();
         int v = value;
         while (v > 0) {
             list.add(v % base);

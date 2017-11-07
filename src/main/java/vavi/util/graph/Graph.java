@@ -39,7 +39,7 @@ public class Graph<T> {
 
     /** */ 
     public Graph() {
-        vertexList = new ArrayList<Vertex<T>>();
+        vertexList = new ArrayList<>();
     }
 
     /** */
@@ -101,7 +101,7 @@ public class Graph<T> {
 
     /** for bfs */
     public void fireAtEnd(int index1, int index2) {
-        List<Vertex<T>> result = new ArrayList<Vertex<T>>();
+        List<Vertex<T>> result = new ArrayList<>();
         result.add(vertexList.get(index1));
         result.add(vertexList.get(index2));
         visitor.atEnd(result);
@@ -109,7 +109,7 @@ public class Graph<T> {
 
     /** for dfs */
     public void fireAtEnd(Iterator<Integer> iterator) {
-        List<Vertex<T>> result = new ArrayList<Vertex<T>>();
+        List<Vertex<T>> result = new ArrayList<>();
         while (iterator.hasNext()) {
             result.add(vertexList.get(iterator.next()));
         }

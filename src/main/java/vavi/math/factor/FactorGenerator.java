@@ -52,7 +52,7 @@ public class FactorGenerator implements Iterator<BigInteger>, Iterable<BigIntege
 
     static {
         Scanner scanner = new Scanner(FactorGenerator.class.getResourceAsStream("/wheel.dat"));
-        List<BigInteger> temp = new ArrayList<BigInteger>();
+        List<BigInteger> temp = new ArrayList<>();
         while (scanner.hasNextLong()) {
             long i = scanner.nextLong();
             temp.add(BigInteger.valueOf(i));

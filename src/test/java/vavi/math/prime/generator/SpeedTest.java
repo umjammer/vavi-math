@@ -53,7 +53,7 @@ est Time = 2.82 est Time = 0.82, 239 primes sum=165040
         long baseTime = estimatedTime;
 
         // Setup ready to run all Prime Generators
-        List<Generator<Integer>> pgs = new ArrayList<Generator<Integer>>();
+        List<Generator<Integer>> pgs = new ArrayList<>();
         pgs.add(new BitSetOddSkippingSievePrimeGenerator(max));
         pgs.add(new OddSkippingSievePrimeGenerator(max));
         pgs.add(new SkippingSievePrimeGenerator(max));

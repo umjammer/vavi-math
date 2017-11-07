@@ -27,13 +27,13 @@ public class DfsTest {
     }
 
     public static void main(String[] args) {
-        Vertex<Character> A = new Vertex<Character>('A');
-        Vertex<Character> B = new Vertex<Character>('B');
-        Vertex<Character> C = new Vertex<Character>('C');
-        Vertex<Character> D = new Vertex<Character>('D');
-        Vertex<Character> E = new Vertex<Character>('E');
+        Vertex<Character> A = new Vertex<>('A');
+        Vertex<Character> B = new Vertex<>('B');
+        Vertex<Character> C = new Vertex<>('C');
+        Vertex<Character> D = new Vertex<>('D');
+        Vertex<Character> E = new Vertex<>('E');
 
-        Graph<Character> graph = new Graph<Character>();
+        Graph<Character> graph = new Graph<>();
         graph.setVisitor(new GraphVisitor<Character>() {
             @Override
             public void atNode(Vertex<Character> vertex) {
@@ -56,7 +56,7 @@ public class DfsTest {
         graph.addEdge(D, E); // DE
 
         System.out.print("Visits: ");
-        new Dfs<Character>(graph).search(); // depth-first search
+        new Dfs<>(graph).search(); // depth-first search
         System.out.println();
         System.out.println(graph);
     }

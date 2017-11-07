@@ -13,7 +13,7 @@ import java.util.Deque;
  */
 public class Dfs<T> implements Searchable {
 
-    private Deque<Integer> stack = new ArrayDeque<Integer>();
+    private Deque<Integer> stack = new ArrayDeque<>();
 
     private Graph<T> graph;
 

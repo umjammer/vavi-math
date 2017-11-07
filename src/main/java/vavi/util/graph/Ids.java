@@ -67,7 +67,7 @@ public class Ids<T> implements Searchable {
 
     /** returns an unvisited vertex adj to v */
     private List<Integer> getAdjUnvisitedVertex(int v) {
-        List<Integer> result = new ArrayList<Integer>();
+        List<Integer> result = new ArrayList<>();
         for (int j = graph.size() - 1; j >= 0; j--) {
             if (graph.isAdjoining(v, j)) {
 //System.err.print("(" + v + ", " + j + ": " + vertexList.get(j) + ")");
