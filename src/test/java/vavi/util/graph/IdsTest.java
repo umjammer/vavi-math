@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 
 /**
- * IdsTest. 
+ * IdsTest.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2013/03/05 umjammer initial version <br>

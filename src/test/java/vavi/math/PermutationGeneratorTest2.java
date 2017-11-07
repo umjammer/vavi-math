@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * permutation generator.
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (vavi)
  * @version 0.00 090619 nsano initial version <br>
  */

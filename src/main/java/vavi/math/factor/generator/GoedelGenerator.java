@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 86, 1995-2005, 2007 Free Software Foundation, Inc.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -12,7 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package vavi.math.factor.generator;
@@ -25,7 +25,7 @@ import vavi.util.Generator;
 
 
 /**
- * Goedel. 
+ * Goedel.
  *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 2009/07/31 nsano initial version <br>
@@ -39,10 +39,10 @@ public class GoedelGenerator extends Generator<Integer> {
         BigInteger n = n0, q;
 
         int goedel = 0;
-        
+
 //        int maxPrime = FactorUtil.maxFactor(n0).intValue();
         int maxPrime = 1500;
-        
+
         Iterator<Integer> i = new OddSkippingSievePrimeGenerator(maxPrime).iterator();
         BigInteger d = new BigInteger(String.valueOf(i.next()));
         do {

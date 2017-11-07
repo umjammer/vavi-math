@@ -1,12 +1,12 @@
 /*
- * http://javacook.darwinsys.com/javasrc/strings/Soundex.java 
+ * http://javacook.darwinsys.com/javasrc/strings/Soundex.java
  */
 
 package vavi.util;
 
 
 /**
- * Soundex. 
+ * Soundex.
  *
  */
 public class Soundex {
@@ -25,7 +25,7 @@ public class Soundex {
 
     /**
      * Convert the given String to its Soundex code.
-     * 
+     *
      * @return null If the given string can't be mapped to Soundex.
      */
     public static String soundex(String s) {

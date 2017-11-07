@@ -7,7 +7,7 @@ package vavi.math;
 
 /**
  * Rational.
- * 
+ *
  * 有理数
  */
 public class Rational extends Number implements Cloneable, Comparable<Rational> {

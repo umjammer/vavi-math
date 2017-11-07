@@ -19,7 +19,7 @@ import javassist.Modifier;
 
 /**
  * MemoizeAgent.
- * 
+ *
  * @author <a href="http://d.hatena.ne.jp/bellbind/20050903/p2"></a>
  * @version 0.00 2009/07/06 nsano initial version <br>
  */
@@ -82,7 +82,7 @@ public class MemoizeAgent implements ClassFileTransformer {
 
             // replace memorized body
             String code = "{" +
-                "vavi.util.memoization.Args args = new vavi.util.memoization.Args($args);" + 
+                "vavi.util.memoization.Args args = new vavi.util.memoization.Args($args);" +
                   "Object result = " + fieldName + ".get(args); " +
                   "if (result != null) {" +
                     (debug ? "System.err.println(\"@vavi.util.memoization.Memoize: use memo: \" + \"" + method.getName() + " " + method.getSignature() + "\");" : "") +

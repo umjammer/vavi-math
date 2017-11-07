@@ -19,7 +19,7 @@ import vavi.math.factor.FactorGenerator;
 
 
 /**
- * Util. 
+ * Util.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2013/02/26 umjammer initial version <br>
@@ -27,7 +27,7 @@ import vavi.math.factor.FactorGenerator;
 public final class Util {
 
     private Util() {}
-    
+
     /** use {@link BigInteger#gcd(BigInteger)} */
     @Deprecated
     public static final BigInteger gcd(BigInteger a, BigInteger b) {
@@ -60,7 +60,7 @@ public final class Util {
     public static BigInteger lcm(BigInteger l, BigInteger r) {
         return l.multiply(r).divide(l.gcd(r));
     }
-    
+
     /** */
     public static BigInteger lcm(BigInteger l, BigInteger... rs) {
         BigInteger b = l;
@@ -117,7 +117,7 @@ public final class Util {
         }
         return count;
     }
-    
+
     /**
      * 素因数分解
      * n = p<sub>1</sub><sup>a<sub>1</sub></sup>p<sub>2</sub><sup>a<sub>2</sub></sup> ... p<sub>m</sub><sup>a<sub>m</sub></sup>
@@ -134,7 +134,7 @@ public final class Util {
 
     /**
      * list divisors
-     * @return sorted 
+     * @return sorted
      */
     public static List<BigInteger> divisors(Map<BigInteger, Integer> entries) {
         return divisors(Arrays.asList(BigInteger.ONE), entries.entrySet().iterator());
@@ -142,7 +142,7 @@ public final class Util {
 
     /**
      * list divisors
-     * @return sorted 
+     * @return sorted
      */
     private static List<BigInteger> divisors(List<BigInteger> preResults, Iterator<Map.Entry<BigInteger, Integer>> entries) {
         if (!entries.hasNext()) {
@@ -166,7 +166,7 @@ public final class Util {
         List<BigInteger> r = divisors(primeFactorization(i));
         BigInteger sum = i.negate();
         for (BigInteger x : r) {
-            sum = sum.add(x); 
+            sum = sum.add(x);
         }
         return sum;
     }

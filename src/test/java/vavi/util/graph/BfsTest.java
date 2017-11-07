@@ -16,7 +16,7 @@ import static org.junit.Assert.fail;
 
 
 /**
- * BfsTest. 
+ * BfsTest.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2013/02/12 umjammer initial version <br>
@@ -44,7 +44,7 @@ public class BfsTest {
 
         Graph<Integer> graph = new Graph<>();
         graph.setVisitor(new GraphVisitor<Integer>() {
-            List<Vertex<Integer>> parent = new ArrayList<>(); 
+            List<Vertex<Integer>> parent = new ArrayList<>();
             @Override
             public void atNode(Vertex<Integer> vertex) {
                 parent.add(vertex);
@@ -102,7 +102,7 @@ System.err.println("B: " + parent.get(i) + ", " + b);
         graph.addEdge(V5, V10);
         graph.addEdge(V7, V11);
         graph.addEdge(V7, V12);
-        
+
 //        System.err.println(graph);
 
         Bfs<Integer> bfs = new Bfs<>(graph);

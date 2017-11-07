@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 
 /**
- * SoundexTest. 
+ * SoundexTest.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2013/01/23 umjammer initial version <br>

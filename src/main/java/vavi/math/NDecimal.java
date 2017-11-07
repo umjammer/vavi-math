@@ -11,7 +11,7 @@ import java.util.List;
 
 
 /**
- * NDecimal. 
+ * NDecimal.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2015/11/06 umjammer initial version <br>
@@ -20,20 +20,20 @@ public class NDecimal {
 
     protected final int base;
     protected final int value;
-    
+
     /**
-     * 
+     *
      */
     public NDecimal(int value, int base) {
         this.value = value;
-        this.base = base; 
+        this.base = base;
     }
 
     public String toString() {
         if (base == 0 || value == 0) {
             return "0";
         }
-        
+
         List<Integer> list = new ArrayList<>();
         int v = value;
         while (v > 0) {

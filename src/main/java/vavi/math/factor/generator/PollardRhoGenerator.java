@@ -12,9 +12,9 @@ import vavi.util.Generator;
 
 /**
  * Compilation: javac PollardRho.java Execution: java PollardRho N
- * 
+ *
  * Factor N using the Pollard-Rho method.
- * 
+ *
  * % java PollardRho 44343535354351600000003434353 149 329569479697
  * 903019357561501
  */

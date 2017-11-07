@@ -14,7 +14,7 @@ import static org.junit.Assert.fail;
 
 
 /**
- * DfsTest. 
+ * DfsTest.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2013/02/12 umjammer initial version <br>

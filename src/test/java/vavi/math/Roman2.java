@@ -9,7 +9,7 @@ package vavi.math;
 
 /**
  * Integer to Roman converter. max 4988
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 MMVII-IV-X nsano initial version <br>
  * @see "http://www.cppfrance.com/codes/VCPLUSPLUS-CONVERSION-ROMAIN-GT-DECIMAL-INVERSE_10812.aspx"

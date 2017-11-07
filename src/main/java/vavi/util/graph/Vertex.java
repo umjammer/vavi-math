@@ -9,7 +9,7 @@ package vavi.util.graph;
 
 /**
  * Vertex.
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 2009/07/17 nsano initial version <br>
  */
