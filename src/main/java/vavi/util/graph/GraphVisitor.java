@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * GraphVisitor.
  *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 2009/07/17 nsano initial version <br>
  */
 public interface GraphVisitor<T> {

@@ -27,7 +27,7 @@ import vavi.util.Generator;
 /**
  * Goedel.
  *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 2009/07/31 nsano initial version <br>
  * @see "http://en.wikipedia.org/wiki/G%C3%B6del_numbering"
  */
