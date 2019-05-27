@@ -17,22 +17,22 @@ import vavi.util.memoization.Memoize;
  * Reverse Polish Notation interpreter. 
  */
 public class Rpn {
-    
+
     /** + */
-    private static final char OP_CHAR_ADD = '+';
+    private static final String OP_ADD = "+";
     /** - */
-    private static final char OP_CHAR_SUBTRACT = '-';
+    private static final String OP_SUBTRACT = "-";
     /** * */
-    private static final char OP_CHAR_MULTIPLY = '*';
+    private static final String OP_MULTIPLY = "*";
     /** / */
-    private static final char OP_CHAR_DIVIDE = '/';
+    private static final String OP_DIVIDE = "/";
 
     /** */
     public enum Op {
-        ADD("+"),
-        SUBTRACT("-"),
-        MULTIPLY("*"),
-        DIVIDE("/");
+        ADD(OP_ADD),
+        SUBTRACT(OP_SUBTRACT),
+        MULTIPLY(OP_MULTIPLY),
+        DIVIDE(OP_DIVIDE);
         String string;
         Op(String string) {
             this.string = string;
@@ -55,27 +55,29 @@ public class Rpn {
                 String part = scan.next();
                 double a, b;
                 for (int i = 0; i < part.length(); i++) {
-                    switch (part.charAt(i)) {
-                    case OP_CHAR_ADD:
+                    switch (part.substring(i, i + 1)) {
+                    case OP_ADD:
                         a = stack.pop();
                         b = stack.pop();
                         stack.push(b + a);
                         break;
-                    case OP_CHAR_SUBTRACT:
+                    case OP_SUBTRACT:
                         a = stack.pop();
                         b = stack.pop();
                         stack.push(b - a);
                         break;
-                    case OP_CHAR_MULTIPLY:
+                    case OP_MULTIPLY:
                         a = stack.pop();
                         b = stack.pop();
                         stack.push(b * a);
                         break;
-                    case OP_CHAR_DIVIDE:
+                    case OP_DIVIDE:
                         a = stack.pop();
                         b = stack.pop();
                         stack.push(b / a);
                         break;
+                    default:
+                        throw new IllegalArgumentException("unsupported operator: " + part.substring(i, i + 1));
                     }
                 }
             }
@@ -97,29 +99,29 @@ public class Rpn {
                 String part = scan.next();
                 Rational a, b;
                 for (int i = 0; i < part.length(); i++) {
-                    switch (part.charAt(i)) {
-                    case OP_CHAR_ADD:
+                    switch (part.substring(i, i + 1)) {
+                    case OP_ADD:
                         a = stack.pop();
                         b = stack.pop();
                         stack.push(b.add(a));
                         break;
-                    case OP_CHAR_SUBTRACT:
+                    case OP_SUBTRACT:
                         a = stack.pop();
                         b = stack.pop();
                         stack.push(b.subtract(a));
                         break;
-                    case OP_CHAR_MULTIPLY:
+                    case OP_MULTIPLY:
                         a = stack.pop();
                         b = stack.pop();
                         stack.push(b.multiply(a));
                         break;
-                    case OP_CHAR_DIVIDE:
+                    case OP_DIVIDE:
                         a = stack.pop();
                         b = stack.pop();
                         stack.push(b.divide(a));
                         break;
                     default:
-                        throw new IllegalArgumentException(expr);
+                        throw new IllegalArgumentException("unsupported operator: " + part.substring(i, i + 1));
                     }
                 }
             }
@@ -202,7 +204,7 @@ public class Rpn {
             }
         }
     }
-    
+
     //-----
 
     private static class Intermediate {
@@ -252,12 +254,12 @@ public class Rpn {
                 stack.push(new Intermediate(newExpr, String.class.cast(token)));
             } else if (token.equals(Op.MULTIPLY.string) || token.equals(Op.DIVIDE.string)) {
                 String leftExpr, rightExpr;
-                
+
                 // Get the intermediate expressions from the stack.  
                 // If an intermediate expression was constructed using a lower precedent
                 // operator (+ or -), we must place parentheses around it to ensure 
                 // the proper order of evaluation.
-                
+
                 Intermediate rightIntermediate = stack.pop();
                 if (rightIntermediate.oper.trim().equals(Op.ADD.string) || rightIntermediate.oper.trim().equals(Op.SUBTRACT.string)) {
                     rightExpr = "(" + rightIntermediate.expr.trim() + ")";

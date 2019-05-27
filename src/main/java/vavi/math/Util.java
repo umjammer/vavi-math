@@ -89,7 +89,7 @@ public final class Util {
 //            fact = fact.multiply(BigInteger.valueOf(i));
 //        }
 //        return fact;
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -122,7 +122,7 @@ public final class Util {
      * 素因数分解
      * n = p<sub>1</sub><sup>a<sub>1</sub></sup>p<sub>2</sub><sup>a<sub>2</sub></sup> ... p<sub>m</sub><sup>a<sub>m</sub></sup>
      * <p>
-     * @return Map<<i>p</i>,<i>a</i>>
+     * @return Map&lt;<i>p</i>,<i>a</i>&gt;
      */
     public static Map<BigInteger, Integer> primeFactorization(BigInteger i) {
         Map<BigInteger, Integer> pairs = new HashMap<>();
