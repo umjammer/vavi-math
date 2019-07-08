@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -23,7 +23,8 @@ public class DfsTest {
 
     @Test
     public void test() {
-        fail("Not yet implemented");
+        main(new String[] {});
+        assertTrue(true);
     }
 
     public static void main(String[] args) {

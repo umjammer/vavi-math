@@ -9,6 +9,7 @@ package vavi.math;
 import java.math.BigInteger;
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class UtilTest {
 
-//    @Test
+    @Disabled
     public void test3() throws Exception {
         int[] a = {
             1,
@@ -49,12 +50,12 @@ public class UtilTest {
     public void test1() throws Exception {
         List<Integer> l = StringUtil.toIntList(primes);
         for (int i = 0; i < 10000; i++) {
-            System.err.println(i);
+//System.err.println(i);
             assertEquals(l.contains(i), BigInteger.valueOf(i).isProbablePrime(100));
         }
     }
 
-//    @Test
+    @Disabled
     public void test() throws Exception {
         assertEquals(BigInteger.ONE, Util.factorial(0));
         assertEquals(BigInteger.ONE, Util.factorial(1));
@@ -63,7 +64,7 @@ public class UtilTest {
         assertEquals(BigInteger.valueOf(362880), Util.factorial(9));
     }
 
-//    @Test
+    @Disabled
     public void test2() {
         try {
             Util.factorial(-1);

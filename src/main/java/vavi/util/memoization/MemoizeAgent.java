@@ -105,7 +105,7 @@ public class MemoizeAgent implements ClassFileTransformer {
             if (Memoize.class.isInstance(annotation)) {
                 Memoize memoize = Memoize.class.cast(annotation);
                 if (memoize.debug()) {
-                    System.err.println("@vavi.util.memoization.Memoize: " + method);
+                    System.err.println("@vavi.util.memoization.Memoize: detect: " + method.getName() + " " + method.getSignature());
                 }
                 return true;
             }

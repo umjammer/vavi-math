@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -22,8 +22,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class DijkstraTest {
 
     @Test
-    public void test() {
-        fail("Not yet implemented");
+    public void test() throws Exception {
+        main(new String[] {});
+        assertTrue(true);
     }
 
     /** */

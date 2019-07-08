@@ -150,7 +150,7 @@ public class Graph<T> {
 
     /**
      * @return .dot format text
-     * @see graphvis
+     * @see "graphvis"
      */
     @Override
     public String toString() {

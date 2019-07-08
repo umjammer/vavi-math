@@ -26,14 +26,14 @@ import java.util.NoSuchElementException;
 
 /**
  * An iterator that yields its values one at a time. Subclasses must define a
- * method called {@link #run()} and may call {@link yield(T)} to return values
+ * method called {@link #run()} and may call {@link #yield(Object)} to return values
  * one at a time.
  * <p>
  * The generator ends when it reaches a return statement or the end of the
  * method. On the other hand, an generator may run forever and thus yield an
  * infinite sequence (see Example 1 for an example).
  * <p>
- * Please beware that calling {@link #hasNext()} on the generator (and thus
+ * Please beware that calling {@link #iterator()} on the generator (and thus
  * any use in a for-each loop) provokes a lookahead of one value. Therefore
  * you cannot repeatedly yield the same object, but rather, you must clone the
  * value on each yield statement (see Example 3 for an example).
@@ -99,7 +99,7 @@ import java.util.NoSuchElementException;
  * its source code before using it in a multi-threaded application.
  *
  * @author Adrian Kuhn &lt;akuhn(at)iam.unibe.ch&gt;
- * @see http://smallwiki.unibe.ch/adriankuhn/yield4java/
+ * @see "http://smallwiki.unibe.ch/adriankuhn/yield4java/"
  *
  */
 public abstract class Generator<T> implements Iterable<T> {

@@ -10,9 +10,9 @@ import vavi.util.Generator;
 
 
 /**
- * Prime generator based on Sieve of Eratosthenes {@link SievePrimeGenerator},
+ * Prime generator based on Sieve of Eratosthenes {@link vavi.math.prime.generator.SievePrimeGenerator},
  * improve speed/memory making the boolean array represent odd numbers instead
- * of all numbers. Then use the ideas from {@link ISievePrimeGenerator}. ie:
+ * of all numbers. Then use the ideas from {@link vavi.math.prime.generator.SievePrimeGenerator}. ie:
  * When sieving using the prime 3 instead of sieving 6,9,12,15,18,21 we can
  * actually sieve 9,15,21 ie jump double our prime. each time.
  */
