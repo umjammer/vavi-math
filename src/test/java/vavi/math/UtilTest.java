@@ -12,7 +12,8 @@ import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 /**
@@ -66,11 +67,9 @@ public class UtilTest {
 
     @Disabled
     public void test2() {
-        try {
+        assertThrows(IllegalArgumentException.class, () -> {
             Util.factorial(-1);
-            fail();
-        } catch (IllegalArgumentException e) {
-        }
+        });
     }
 }
 

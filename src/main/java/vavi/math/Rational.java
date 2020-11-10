@@ -23,7 +23,7 @@ public class Rational extends Number implements Cloneable, Comparable<Rational> 
         denominator = 1;
     }
 
-    /** TODO */
+    /** TODO made sigleton instance for performance */
     private static final RationalException exception = new RationalException("denominator is zero!");
 
     /** */

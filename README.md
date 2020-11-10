@@ -2,8 +2,8 @@
 
 # vavi-math
 
-    - Rational
-    - Combination Generator
-    - Permutation Generator
-    - Reverse Polish Notation
-    - Memoization
+  * Rational
+  * Combination Generator
+  * Permutation Generator
+  * Reverse Polish Notation
+  * Memoization

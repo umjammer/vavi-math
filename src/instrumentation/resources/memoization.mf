@@ -1,1 +1,2 @@
 Premain-Class: vavi.util.memoization.MemoizeAgent
+Can-Redefine-Classes: true

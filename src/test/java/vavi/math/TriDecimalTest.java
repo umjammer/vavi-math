@@ -1,19 +1,18 @@
-package vavi.math;
 /*
  * Copyright (c) 2015 by Naohide Sano, All rights reserved.
  *
  * Programmed by Naohide Sano
  */
 
+package vavi.math;
+
 import org.junit.jupiter.api.Test;
 
-import vavi.math.TriDecimal;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
- * TestTriDecimal. 
+ * TestTriDecimal.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2015/11/06 umjammer initial version <br>
@@ -69,7 +68,7 @@ public class TriDecimalTest {
         sb.insert(0, "0000000000000000000");
         return sb.reverse().toString();
     }
-    
+
     public static void main(String[] args) throws Exception {
         System.err.println(TriDecimal.toDecimal("220120"));
 //        for (int i = 0; i < Math.pow(3, 20); i++) {

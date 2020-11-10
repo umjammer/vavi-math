@@ -48,24 +48,24 @@ public class RpnTest {
     public void test4() throws Exception {
         long n = System.nanoTime();
         char[][] result = Rpn.generatePattern(9, 10);
-        System.err.println("--- 9, 10 ---, " + result.length + ", " + (System.nanoTime() - n));
-//        for (char[] str : result) {
-//            for (char c : str) {
-//                System.err.print(c);
-//            }
-//            System.err.println();
-//        }
+System.err.println("--- 9, 10 ---, " + result.length + ", " + (System.nanoTime() - n));
+//for (char[] str : result) {
+// for (char c : str) {
+//  System.err.print(c);
+// }
+// System.err.println();
+//}
         assertEquals(4862, result.length);
 
         n = System.nanoTime();
         result = Rpn.generatePattern(3, 4);
-        System.err.println("--- 3, 4 ---, " + result.length + ", " + (System.nanoTime() - n));
-//        for (char[] str : result) {
-//            for (char c : str) {
-//                System.err.print(c);
-//            }
-//            System.err.println();
-//        }
+System.err.println("--- 3, 4 ---, " + result.length + ", " + (System.nanoTime() - n));
+//for (char[] str : result) {
+// for (char c : str) {
+//  System.err.print(c);
+// }
+// System.err.println();
+//}
         assertEquals(5, result.length);
     }
 }

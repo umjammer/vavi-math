@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 
 
 /**
- * Memoize. 
+ * Memoize.
  *
  * @author <a href="http://d.hatena.ne.jp/bellbind/20050903/p2"></>
  * @version 0.00 2009/07/06 nsano initial version <br>
@@ -19,7 +19,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Memoize {
-    
+
     /** */
     boolean debug() default false;
 }

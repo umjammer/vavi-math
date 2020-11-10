@@ -14,7 +14,7 @@ import vavi.util.memoization.Memoize;
 
 
 /**
- * Reverse Polish Notation interpreter. 
+ * Reverse Polish Notation interpreter.
  */
 public class Rpn {
 
@@ -134,8 +134,10 @@ public class Rpn {
     private Deque<Rational> stack = new ArrayDeque<>();
 
     /**
+     * not thread safe
      * @param expr is only Rational value, and char operator accepted.
      * @throws ClassCastException
+     * @see #stack
      */
     public Rational rationalValue(Object[] expr) throws RationalException {
         stack.clear();
