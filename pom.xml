@@ -75,7 +75,7 @@
                   <fileset dir="${project.build.outputDirectory}">
                     <include name="vavi/util/memoization/*.class" />
                   </fileset>
-                  <zipfileset src="${maven.dependency.javassist.javassist.jar.path}"
+                  <zipfileset src="${maven.dependency.org.javassist.javassist.jar.path}"
                               excludes="META-INF/**"/>
                 </jar>
               </target>
