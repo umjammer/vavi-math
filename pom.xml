@@ -122,6 +122,8 @@
         <version>1.6.0</version>
         <executions>
           <execution>
+            <id>deploy-library</id>
+            <phase>deploy</phase>
             <goals>
               <goal>exec</goal>
             </goals>
@@ -146,9 +148,9 @@
 
   <dependencies>
     <dependency>
-      <groupId>javassist</groupId>
+      <groupId>org.javassist</groupId>
       <artifactId>javassist</artifactId>
-      <version>3.12.1.GA</version>
+      <version>3.23.0-GA</version>
       <scope>provided</scope>
     </dependency>
 
