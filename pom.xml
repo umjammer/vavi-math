@@ -33,52 +33,6 @@
     </repository>
   </distributionManagement>
 
-  <profiles>
-    <profile>
-      <id>deploy-memoization</id>
-      <activation>
-        <property>
-          <name>deploy-memoization</name>
-          <value></value>
-        </property>
-        <file>
-          <exists>${project.build.directory}/vavi-memoization-${project.version}.jar</exists>
-        </file>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <!-- exec:exec -->
-            <!-- $ mvn -P deploy-instrumentation exec:exec -->
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <version>1.6.0</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>exec</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <executable>mvn</executable>
-              <arguments>
-                <argument>deploy:deploy-file</argument>
-                <argument>-DgroupId=${project.groupId}</argument>
-                <argument>-DartifactId=vavi-memoization</argument>
-                <argument>-Dversion=${project.version}</argument>
-                <argument>-Dpackaging=jar</argument>
-                <argument>-Dfile=${project.build.directory}/vavi-memoization-${project.version}.jar</argument>
-                <argument>-DrepositoryId=bintray</argument>
-                <argument>-Durl=https://api.bintray.com/maven/umjammer/maven/vavi-memoization</argument>
-              </arguments>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
-
   <build>
     <plugins>
       <plugin>
@@ -89,6 +43,21 @@
           <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.22.0</version>
+        <configuration>
+          <trimStackTrace>false</trimStackTrace>
+          <forkMode>once</forkMode>
+          <argLine>
+            -javaagent:${project.build.directory}/vavi-memoization-${project.version}.jar
+            -Djava.util.logging.config.file=${project.build.testResources.testResource.directory}/logging.properties
+          </argLine>
+        </configuration>
+      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
@@ -114,17 +83,62 @@
           </execution>
         </executions>
       </plugin>
+
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.0</version>
+        <artifactId>maven-install-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>install-library</id>
+            <phase>install</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>vavi-memoization</artifactId>
+              <version>${project.version}</version>
+              <packaging>jar</packaging>
+              <file>${project.build.directory}/vavi-memoization-${project.version}.jar</file>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-deploy-plugin</artifactId>
         <configuration>
-          <trimStackTrace>false</trimStackTrace>
-          <forkMode>once</forkMode>
-          <argLine>
-            -javaagent:${project.build.directory}/vavi-memoization-${project.version}.jar
-            -Djava.util.logging.config.file=${project.build.testResources.testResource.directory}/logging.properties
-          </argLine>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <!--
+          because of maven deploy-file uploads source, jar also
+          TODO maven-metadata.xml!/metadata/versioning/latest is not updated
+          TODO how about https://stackoverflow.com/a/37552776/6102938
+         -->
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <executable>mvn</executable>
+          <arguments>
+            <argument>deploy:deploy-file</argument>
+            <argument>-DgroupId=${project.groupId}</argument>
+            <argument>-DartifactId=vavi-memoization</argument>
+            <argument>-Dversion=${project.version}</argument>
+            <argument>-Dpackaging=jar</argument>
+            <argument>-Dfile=${project.build.directory}/vavi-memoization-${project.version}.jar</argument>
+            <argument>-DrepositoryId=bintray</argument>
+            <argument>-Durl=https://api.bintray.com/maven/umjammer/maven/vavi-memoization</argument>
+          </arguments>
         </configuration>
       </plugin>
     </plugins>
