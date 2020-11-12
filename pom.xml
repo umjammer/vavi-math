@@ -8,7 +8,7 @@
 
   <groupId>vavi</groupId>
   <artifactId>vavi-math</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.3</version>
 
   <name>Vavi Math Library</name>
   <organization>
@@ -24,6 +24,52 @@
   <issueManagement>
     <url>https://github.com/umjammer/vavi-math/issues</url>
   </issueManagement>
+
+  <profiles>
+    <profile>
+      <id>deploy-memoization</id>
+      <activation>
+        <property>
+          <name>deploy-memoization</name>
+          <value></value>
+        </property>
+        <file>
+          <exists>${project.build.directory}/vavi-memoization-${project.version}.jar</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <!-- exec:exec -->
+            <!-- $ mvn -P deploy-instrumentation exec:exec -->
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.6.0</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <executable>mvn</executable>
+              <arguments>
+                <argument>deploy:deploy-file</argument>
+                <argument>-DgroupId=${project.groupId}</argument>
+                <argument>-DartifactId=vavi-memoization</argument>
+                <argument>-Dversion=${project.version}</argument>
+                <argument>-Dpackaging=jar</argument>
+                <argument>-Dfile=${project.build.directory}/vavi-memoization-${project.version}.jar</argument>
+                <argument>-DrepositoryId=bintray</argument>
+                <argument>-Durl=https://api.bintray.com/maven/umjammer/maven/vavi-memoization</argument>
+              </arguments>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
   <build>
     <plugins>
@@ -47,10 +93,13 @@
             </goals>
             <configuration>
               <target>
-                <jar jarfile="target/memoization.jar" manifest="src/main/resources/memoization.mf">
-                  <fileset dir="target/classes">
+                <jar jarfile="${project.build.directory}/vavi-memoization-${project.version}.jar"
+                     manifest="src/instrumentation/resources/memoization.mf">
+                  <fileset dir="${project.build.outputDirectory}">
                     <include name="vavi/util/memoization/*.class" />
                   </fileset>
+                  <zipfileset src="${maven.dependency.javassist.javassist.jar.path}"
+                              excludes="META-INF/**"/>
                 </jar>
               </target>
             </configuration>
@@ -62,21 +111,23 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.22.0</version>
         <configuration>
+          <trimStackTrace>false</trimStackTrace>
           <forkMode>once</forkMode>
-          <argLine>-javaagent:target/memoization.jar</argLine>
+          <argLine>
+            -javaagent:${project.build.directory}/vavi-memoization-${project.version}.jar
+            -Djava.util.logging.config.file=${project.build.testResources.testResource.directory}/logging.properties
+          </argLine>
         </configuration>
       </plugin>
     </plugins>
   </build>
-
-  <repositories>
-  </repositories>
 
   <dependencies>
     <dependency>
       <groupId>javassist</groupId>
       <artifactId>javassist</artifactId>
       <version>3.12.1.GA</version>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
@@ -91,6 +142,11 @@
       <version>5.3.0</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-commons</artifactId>
+      <version>1.5.2</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
-
 </project>
