@@ -182,7 +182,7 @@ public class Rpn {
 
     /**
      * http://www.ozzu.com/programming-forum/math-programming-question-t59970.html
-     * not thread safe... 
+     * not thread safe...
      */
     public static char[][] generatePattern(int ops, int nums) {
         List<char[]> result = new ArrayList<>();
@@ -248,7 +248,7 @@ public class Rpn {
                 Intermediate rightIntermediate = stack.pop();
                 Intermediate leftIntermediate = stack.pop();
 
-                // construct the new intermediate expression by combining the left and right 
+                // construct the new intermediate expression by combining the left and right
                 // expressions using the operator (token).
                 String newExpr = leftIntermediate.expr + " " + token + " " + rightIntermediate.expr;
 
@@ -257,9 +257,9 @@ public class Rpn {
             } else if (token.equals(Op.MULTIPLY.string) || token.equals(Op.DIVIDE.string)) {
                 String leftExpr, rightExpr;
 
-                // Get the intermediate expressions from the stack.  
+                // Get the intermediate expressions from the stack.
                 // If an intermediate expression was constructed using a lower precedent
-                // operator (+ or -), we must place parentheses around it to ensure 
+                // operator (+ or -), we must place parentheses around it to ensure
                 // the proper order of evaluation.
 
                 Intermediate rightIntermediate = stack.pop();
@@ -276,7 +276,7 @@ public class Rpn {
                     leftExpr = leftIntermediate.expr;
                 }
 
-                // construct the new intermediate expression by combining the left and right 
+                // construct the new intermediate expression by combining the left and right
                 // using the operator (token).
                 String newExpr = leftExpr + " " + token + " " + rightExpr;
 

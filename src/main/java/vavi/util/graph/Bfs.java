@@ -19,7 +19,7 @@ public class Bfs<T> implements Searchable {
     /** */
     private Graph<T> graph;
 
-    /** */ 
+    /** */
     public Bfs(Graph<T> graph) {
         this.graph = graph;
     }

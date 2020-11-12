@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 /**
  * Args.
- * 
+ *
  * @author <a href="http://d.hatena.ne.jp/bellbind/20050903/p2"></a>
  * @version 0.00 2009/07/06 nsano initial version <br>
  */

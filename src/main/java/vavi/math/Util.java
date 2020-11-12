@@ -82,6 +82,7 @@ public final class Util {
     /**
      * Compute factorial
      */
+    @Deprecated
     public static BigInteger factorial(int n) {
 //        if (n < 0) throw new IllegalArgumentException("negative number");
 //        BigInteger fact = BigInteger.ONE;

@@ -7,8 +7,6 @@ package vavi.math;
 
 /**
  * Rational.
- *
- * 有理数
  */
 public class Rational extends Number implements Cloneable, Comparable<Rational> {
 
@@ -23,7 +21,7 @@ public class Rational extends Number implements Cloneable, Comparable<Rational> 
         denominator = 1;
     }
 
-    /** TODO made sigleton instance for performance */
+    /** TODO made singleton instance for performance */
     private static final RationalException exception = new RationalException("denominator is zero!");
 
     /** */
@@ -42,7 +40,7 @@ public class Rational extends Number implements Cloneable, Comparable<Rational> 
     /** */
     private static final int gcd(int x, int y) {
         int wk = 1;
-        x *= Integer.signum(x); // 符号無しにする
+        x *= Integer.signum(x); // make those unsigned
         y *= Integer.signum(y);
         while (y != 0) {
             wk = x % y;
