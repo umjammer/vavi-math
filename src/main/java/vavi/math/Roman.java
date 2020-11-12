@@ -9,7 +9,7 @@ package vavi.math;
 
 /**
  * A static method for converting binary integers to Roman numbers.
- * 
+ *
  * @author Fred Swartz 2006-12-29 Placed in public domain.
  */
 class Roman {

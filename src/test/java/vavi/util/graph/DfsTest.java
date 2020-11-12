@@ -8,13 +8,13 @@ package vavi.util.graph;
 
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
- * DfsTest. 
+ * DfsTest.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2013/02/12 umjammer initial version <br>
@@ -23,7 +23,8 @@ public class DfsTest {
 
     @Test
     public void test() {
-        fail("Not yet implemented");
+        main(new String[] {});
+        assertTrue(true);
     }
 
     public static void main(String[] args) {

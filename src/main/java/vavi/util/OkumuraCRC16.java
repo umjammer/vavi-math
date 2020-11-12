@@ -6,12 +6,12 @@ package vavi.util;
 
 
 /**
- * CRC_Okumura.
- * 
+ * OkumuraCRC16.
+ *
  * @author Okumura
  * @version 0.00 050102 nsano port to java <br>
  */
-class CRC_Okumura {
+class OkumuraCRC16 {
     // x^{16}+x^{12}+x^5+1
     static final int CRCPOLY1 = 0x1021;
     // １バイトのビット数
@@ -25,7 +25,7 @@ class CRC_Okumura {
      * @return CRC 値を返します。
      */
     public int update(byte c[]) {
-        
+
         for (int i = 0; i < c.length; i++) {
             crc ^= (c[i] & 0xff) << (16 - BYTE_BIT);
             for (int j = 0; j < BYTE_BIT; j++) {
@@ -43,6 +43,6 @@ class CRC_Okumura {
     public long getValue() {
         return crc;
     }
-}    
+}
 
 /* */

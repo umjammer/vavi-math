@@ -41,7 +41,7 @@ est Time = 2.82 est Time = 0.82, 239 primes sum=165040
 
         // Baseline
         System.out.println("\nBaseline");
-        // real 
+        // real
         primeNums = new SievePrimeGenerator(max);
         primeNums = new SievePrimeGenerator(max);
         startTime = System.nanoTime();

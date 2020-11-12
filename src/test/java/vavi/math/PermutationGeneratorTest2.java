@@ -8,15 +8,15 @@ package vavi.math;
 
 import java.util.Scanner;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
  * permutation generator.
- * 
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (vavi)
+ *
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (vavi)
  * @version 0.00 090619 nsano initial version <br>
  */
 public class PermutationGeneratorTest2 {

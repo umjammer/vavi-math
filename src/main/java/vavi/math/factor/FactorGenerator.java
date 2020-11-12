@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 86, 1995-2005, 2007 Free Software Foundation, Inc.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -12,7 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package vavi.math.factor;
@@ -26,10 +26,10 @@ import java.util.Scanner;
 
 /**
  * factor -- print prime factors of n.
- * 
+ *
  * Written by Paul Rubin <phr@ocf.berkeley.edu>.
  * Adapted for GNU, fixed to factor UINT_MAX by Jim Meyering.
- * 
+ *
  * @see "coreutils/src/factor.c"
  */
 public class FactorGenerator implements Iterator<BigInteger>, Iterable<BigInteger> {
@@ -132,7 +132,7 @@ public class FactorGenerator implements Iterator<BigInteger>, Iterable<BigIntege
     public void remove() {
         throw new UnsupportedOperationException();
     }
-    
+
     /** need ? */
     public int size() {
         return factors.size();

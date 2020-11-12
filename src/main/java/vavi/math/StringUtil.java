@@ -13,7 +13,7 @@ import java.util.Map;
 
 
 /**
- * StringUtil. 
+ * StringUtil.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2012/11/01 umjammer initial version <br>
@@ -163,7 +163,11 @@ public abstract class StringUtil {
         "ninety",
     };
 
-    /** @param i <= 1000 */
+    /**
+     * TODO use locale
+     * @param i <= 1000
+     * @see "https://stackoverflow.com/questions/3911966/how-to-convert-number-to-words-in-java"
+     */
     public static String formatInBritishEnglish(int i) {
         if (i < 20) {
             return underTwenties[i - 1];

@@ -6,13 +6,15 @@ package vavi.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 
 public class Coroutine {
 
-    private final ArrayList<Thread> pool = new ArrayList<>();
-    private final HashMap<Thread, Integer> dict = new HashMap<>();
+    private final List<Thread> pool = new ArrayList<>();
+    private final Map<Thread, Integer> dict = new HashMap<>();
     private final Random rand = new Random();
     private final Object mutex = new Object();
     private volatile int currentId;

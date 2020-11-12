@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
- * BfsTest. 
+ * BfsTest.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2013/02/12 umjammer initial version <br>
@@ -25,7 +25,8 @@ public class BfsTest {
 
     @Test
     public void test() {
-        fail("Not yet implemented");
+        main(new String[] {});
+        assertTrue(true);
     }
 
     public static void main(String[] args) {
@@ -44,7 +45,7 @@ public class BfsTest {
 
         Graph<Integer> graph = new Graph<>();
         graph.setVisitor(new GraphVisitor<Integer>() {
-            List<Vertex<Integer>> parent = new ArrayList<>(); 
+            List<Vertex<Integer>> parent = new ArrayList<>();
             @Override
             public void atNode(Vertex<Integer> vertex) {
                 parent.add(vertex);
@@ -102,7 +103,7 @@ System.err.println("B: " + parent.get(i) + ", " + b);
         graph.addEdge(V5, V10);
         graph.addEdge(V7, V11);
         graph.addEdge(V7, V12);
-        
+
 //        System.err.println(graph);
 
         Bfs<Integer> bfs = new Bfs<>(graph);

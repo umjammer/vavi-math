@@ -10,7 +10,7 @@ import java.math.BigInteger;
 
 
 /**
- * Util. 
+ * Util.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2013/02/28 umjammer initial version <br>

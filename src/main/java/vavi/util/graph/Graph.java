@@ -14,8 +14,8 @@ import java.util.List;
 
 /**
  * Graph.
- * 
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ *
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 2009/07/17 nsano initial version <br>
  */
 public class Graph<T> {
@@ -37,7 +37,7 @@ public class Graph<T> {
         return weights[start][end];
     }
 
-    /** */ 
+    /** */
     public Graph() {
         vertexList = new ArrayList<>();
     }
@@ -150,7 +150,7 @@ public class Graph<T> {
 
     /**
      * @return .dot format text
-     * @see graphvis 
+     * @see "graphvis"
      */
     @Override
     public String toString() {
@@ -159,7 +159,7 @@ public class Graph<T> {
         sb.append(super.toString());
         sb.append("\" {\n");
         sb.append("concentrate=true\n");
-        
+
         for (int y = 0; y < adjMat.length; y++) {
             for (int x = 0; x < adjMat[y].length; x++) {
                 if (adjMat[y][x]) {

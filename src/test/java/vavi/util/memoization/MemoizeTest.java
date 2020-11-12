@@ -5,14 +5,14 @@
  */
 
 package vavi.util.memoization;
-    
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
- * MemoizeTest. 
+ * MemoizeTest.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2013/03/05 umjammer initial version <br>
@@ -29,7 +29,7 @@ public class MemoizeTest {
         int s = 0;
         s += m1(1);
         s += m1(1);
-        assertEquals(count, 2);
+        assertEquals(2, count);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class MemoizeTest {
         s += m2(3);
         s += m2(3);
         s += m2(3);
-        assertEquals(count, 3);
+        assertEquals(3, count);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class MemoizeTest {
         s += m3(3);
         s += m3(3);
         s += m3(3);
-        assertEquals(count, 3);
+        assertEquals(3, count);
     }
 
     @Memoize(debug = true) // no mean

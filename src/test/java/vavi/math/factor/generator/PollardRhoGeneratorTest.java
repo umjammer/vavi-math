@@ -8,15 +8,15 @@ package vavi.math.factor.generator;
 
 import java.math.BigInteger;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import vavi.math.StringUtil;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
- * PollardRhoTest. 
+ * PollardRhoTest.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2012/11/02 umjammer initial version <br>

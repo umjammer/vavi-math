@@ -9,8 +9,8 @@ package vavi.math;
 
 /**
  * Integer to Roman converter.
- * 
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ *
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 MMVII-IV-X nsano initial version <br>
  */
 @Deprecated

@@ -18,7 +18,7 @@ public class CombinationGenerator implements Iterator<int[]>, Iterable<int[]> {
     private BigInteger numLeft;
     private BigInteger total;
 
-    /** 
+    /**
      * @param n selected
      * @param r selection
      * @throws IllegalArgumentException when r > n, n < 1

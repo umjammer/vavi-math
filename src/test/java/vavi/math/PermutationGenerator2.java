@@ -8,7 +8,7 @@ import vavi.util.Generator;
 
 
 /**
- * Systematically generate permutations. 
+ * Systematically generate permutations.
  */
 public class PermutationGenerator2 extends Generator<int[]> {
 

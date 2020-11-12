@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 
 /**
- * Systematically generate permutations. 
+ * Systematically generate permutations.
  */
 public class PermutationGenerator implements Iterator<int[]>, Iterable<int[]> {
 

@@ -6,13 +6,14 @@
 
 package vavi.math;
 
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
- * RpnTest. 
+ * RpnTest.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2012/11/01 umjammer initial version <br>
@@ -26,7 +27,7 @@ public class RpnTest {
         System.err.println(rpn.doubleValue("1 1 +"));
         System.err.println(rpn.rationalValue("1 3 /"));
 
-        assertEquals(3, rpn.doubleValue("1 2 +"), 0);
+        assertEquals(3, rpn.doubleValue("1 2 +"), 0.001);
     }
 
     @Test
@@ -42,29 +43,29 @@ public class RpnTest {
         assertEquals("(1 + 3) / 3", infix);
     }
 
-    /** test pattern */
+    @DisplayName("test pattern")
     @Test
     public void test4() throws Exception {
         long n = System.nanoTime();
         char[][] result = Rpn.generatePattern(9, 10);
-        System.err.println("--- 9, 10 ---, " + result.length + ", " + (System.nanoTime() - n));
-//        for (char[] str : result) {
-//            for (char c : str) {
-//                System.err.print(c);
-//            }
-//            System.err.println();
-//        }
+System.err.println("--- 9, 10 ---, " + result.length + ", " + (System.nanoTime() - n));
+//for (char[] str : result) {
+// for (char c : str) {
+//  System.err.print(c);
+// }
+// System.err.println();
+//}
         assertEquals(4862, result.length);
 
         n = System.nanoTime();
         result = Rpn.generatePattern(3, 4);
-        System.err.println("--- 3, 4 ---, " + result.length + ", " + (System.nanoTime() - n));
-//        for (char[] str : result) {
-//            for (char c : str) {
-//                System.err.print(c);
-//            }
-//            System.err.println();
-//        }
+System.err.println("--- 3, 4 ---, " + result.length + ", " + (System.nanoTime() - n));
+//for (char[] str : result) {
+// for (char c : str) {
+//  System.err.print(c);
+// }
+// System.err.println();
+//}
         assertEquals(5, result.length);
     }
 }

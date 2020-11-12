@@ -9,14 +9,14 @@ package vavi.math;
 import java.math.BigInteger;
 import java.util.Scanner;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static vavi.math.StringUtil.toSubscript;
 
 
 /**
- * CombinationGeneratorTest. 
+ * CombinationGeneratorTest.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2012/11/01 umjammer initial version <br>

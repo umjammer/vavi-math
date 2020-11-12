@@ -8,9 +8,9 @@ package vavi.util.graph;
 
 
 /**
- * Searchable. 
+ * Searchable.
  *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 2009/07/17 nsano initial version <br>
  */
 public interface Searchable {
@@ -18,7 +18,7 @@ public interface Searchable {
     void setStart(int start);
 
     void search();
-    
+
     enum Type {
         DFS(Dfs.class),
         BFS(Bfs.class);

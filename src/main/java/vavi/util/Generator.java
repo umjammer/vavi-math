@@ -1,15 +1,15 @@
 //  Copyright (c) 2007-2008 Adrian Kuhn <akuhn(a)iam.unibe.ch>
-//  
+//
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
 //  in the Software without restriction, including without limitation the rights
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
-//  
+//
 //  The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
-//  
+//
 //  The software is provided "as is", without warranty of any kind, express or
 //  implied, including but not limited to the warranties of merchantability,
 //  fitness for a particular purpose and noninfringement. In no event shall the
@@ -26,17 +26,17 @@ import java.util.NoSuchElementException;
 
 /**
  * An iterator that yields its values one at a time. Subclasses must define a
- * method called {@link #run()} and may call {@link yield(T)} to return values
+ * method called {@link #run()} and may call {@link #yield(Object)} to return values
  * one at a time.
  * <p>
  * The generator ends when it reaches a return statement or the end of the
  * method. On the other hand, an generator may run forever and thus yield an
  * infinite sequence (see Example 1 for an example).
  * <p>
- * Please beware that calling {@link #hasNext()} on the generator (and thus
+ * Please beware that calling {@link #iterator()} on the generator (and thus
  * any use in a for-each loop) provokes a lookahead of one value. Therefore
  * you cannot repeatedly yield the same object, but rather, you must clone the
- * value on each yield statement (see Example 3 for an example). 
+ * value on each yield statement (see Example 3 for an example).
  * <p>
  * <b>Example 1:</b> Yields an infinite sequence of fibonacci numbers.
  * <pre>Generator&lt;Integer&gt; fibonacci = new Generator&lt;Integer&gt;() {
@@ -45,7 +45,7 @@ import java.util.NoSuchElementException;
  *        int a = 0, b = 1;
  *        while (true) {
  *            a = b + (b = a);
- *            yield(a); 
+ *            yield(a);
  *        }
  *    }
  *};
@@ -68,7 +68,7 @@ import java.util.NoSuchElementException;
  *
  *for (char each : hello) {
  *    System.out.println(each);
- *}</pre> 
+ *}</pre>
  * <p>
  * <b>Example 3:</b> Yields all perutations of an array.
  * <pre>public static &lt;T&gt; Generator&lt;T[]&gt; permute(final T[] a) {
@@ -92,15 +92,15 @@ import java.util.NoSuchElementException;
  *        }
  *    };
  *}</pre>
- * 
+ *
  * <p>&nbsp;
  *
  * <b>NB:</b> this class makes use of Threads, you might want to double-check
  * its source code before using it in a multi-threaded application.
  *
  * @author Adrian Kuhn &lt;akuhn(at)iam.unibe.ch&gt;
- * @see http://smallwiki.unibe.ch/adriankuhn/yield4java/ 
- * 
+ * @see "http://smallwiki.unibe.ch/adriankuhn/yield4java/"
+ *
  */
 public abstract class Generator<T> implements Iterable<T> {
 
@@ -149,7 +149,7 @@ public abstract class Generator<T> implements Iterable<T> {
     protected void yield(T value) {
         put(value);
     }
-    
+
     public synchronized void done() {
         if (drop == DONE)
             throw new IllegalStateException();

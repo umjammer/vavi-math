@@ -5,17 +5,72 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>vavi</groupId>
   <artifactId>vavi-math</artifactId>
+  <version>0.0.3</version>
+
   <name>Vavi Math Library</name>
   <organization>
     <name></name>
   </organization>
-  <version>0.0.2</version>
   <url>https://github.com/umjammer/vavi-math</url>
   <description>0.0.2
 
     add memoization</description>
+  <scm>
+    <url>https://github.com/umjammer/vavi-math</url>
+  </scm>
+  <issueManagement>
+    <url>https://github.com/umjammer/vavi-math/issues</url>
+  </issueManagement>
+
+  <profiles>
+    <profile>
+      <id>deploy-memoization</id>
+      <activation>
+        <property>
+          <name>deploy-memoization</name>
+          <value></value>
+        </property>
+        <file>
+          <exists>${project.build.directory}/vavi-memoization-${project.version}.jar</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <!-- exec:exec -->
+            <!-- $ mvn -P deploy-instrumentation exec:exec -->
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.6.0</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <executable>mvn</executable>
+              <arguments>
+                <argument>deploy:deploy-file</argument>
+                <argument>-DgroupId=${project.groupId}</argument>
+                <argument>-DartifactId=vavi-memoization</argument>
+                <argument>-Dversion=${project.version}</argument>
+                <argument>-Dpackaging=jar</argument>
+                <argument>-Dfile=${project.build.directory}/vavi-memoization-${project.version}.jar</argument>
+                <argument>-DrepositoryId=bintray</argument>
+                <argument>-Durl=https://api.bintray.com/maven/umjammer/maven/vavi-memoization</argument>
+              </arguments>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
   <build>
     <plugins>
       <plugin>
@@ -26,28 +81,72 @@
           <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.8</version>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <jar jarfile="${project.build.directory}/vavi-memoization-${project.version}.jar"
+                     manifest="src/instrumentation/resources/memoization.mf">
+                  <fileset dir="${project.build.outputDirectory}">
+                    <include name="vavi/util/memoization/*.class" />
+                  </fileset>
+                  <zipfileset src="${maven.dependency.javassist.javassist.jar.path}"
+                              excludes="META-INF/**"/>
+                </jar>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.22.0</version>
+        <configuration>
+          <trimStackTrace>false</trimStackTrace>
+          <forkMode>once</forkMode>
+          <argLine>
+            -javaagent:${project.build.directory}/vavi-memoization-${project.version}.jar
+            -Djava.util.logging.config.file=${project.build.testResources.testResource.directory}/logging.properties
+          </argLine>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
-  <repositories>
-  </repositories>
+
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.13.1</version>
-      <scope>test</scope>
-      <optional>false</optional>
-    </dependency>
     <dependency>
       <groupId>javassist</groupId>
       <artifactId>javassist</artifactId>
       <version>3.12.1.GA</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.3.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.3.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-commons</artifactId>
+      <version>1.5.2</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
-  <scm>
-    <url>https://github.com/umjammer/vavi-math</url>
-  </scm>
-  <issueManagement>
-    <url>https://github.com/umjammer/vavi-math/issues</url>
-  </issueManagement>
 </project>
