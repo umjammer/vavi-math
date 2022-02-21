@@ -46,7 +46,7 @@ public final class Util {
     /** */
     public static final int gcd(int x, int y) {
         int wk = 1;
-        x *= Integer.signum(x); // 符号無しにする
+        x *= Integer.signum(x); // make it unsigned
         y *= Integer.signum(y);
         while (y != 0) {
             wk = x % y;
@@ -106,7 +106,7 @@ public final class Util {
     }
 
     /**
-     * 約数の個数
+     * Returns count of divisors.
      * <p>
      * d(n) = (a<sub>1</sub> + 1)(a<sub>2</sub> + 1) ... (a<sub>m</sub> + 1)
      * @param indeces <i>a</i>
@@ -120,7 +120,7 @@ public final class Util {
     }
 
     /**
-     * 素因数分解
+     * Prime factorization.
      * n = p<sub>1</sub><sup>a<sub>1</sub></sup>p<sub>2</sub><sup>a<sub>2</sub></sup> ... p<sub>m</sub><sup>a<sub>m</sub></sup>
      * <p>
      * @return Map&lt;<i>p</i>,<i>a</i>&gt;

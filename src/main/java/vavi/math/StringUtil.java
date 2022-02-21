@@ -115,21 +115,6 @@ public abstract class StringUtil {
         return l;
     }
 
-//    private static <T> T valueOf(String s) {
-//        if (T instanceof Integer) return null;
-//    }
-
-    /** */
-//    public static <T> List<T> toList(String s) {
-//        s = s.replaceAll("[] ", "");
-//        String[] a = s.split(",");
-//        List<T> l = new ArrayList<>();
-//        for (String e : a) {
-//            l.add(valueOf(e));
-//        }
-//        return l;
-//    }
-
     private static final String[] underTwenties = {
         "one",
         "two",

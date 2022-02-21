@@ -6,9 +6,11 @@
 
 package vavi.util;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 
 /**
@@ -19,17 +21,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class SoundexTest {
 
+    static final String[] names = {
+        "Darwin, Ian", "Davidson, Greg", "Darwent, William", "Derwin, Daemon"
+    };
+
+    static final String[] soundexes = {
+        "D650", "D132", "D653", "D650"
+    };
+
     @Test
     public void test() {
-        main(new String[] {});
-        assertTrue(true);
+        assertArrayEquals(soundexes, Arrays.stream(names).map(Soundex::soundex).toArray());
     }
 
     /** main */
     public static void main(String[] args) {
-        String[] names = {
-            "Darwin, Ian", "Davidson, Greg", "Darwent, William", "Derwin, Daemon"
-        };
         for (int i = 0; i < names.length; i++)
             System.out.println(Soundex.soundex(names[i]) + ' ' + names[i]);
     }

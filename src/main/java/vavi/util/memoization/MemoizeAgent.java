@@ -59,7 +59,7 @@ public class MemoizeAgent implements ClassFileTransformer {
 //if (newClass.getName().startsWith("vavi.util")) {
 //System.err.println("memoize: " + newClass.getName() + ": " + method.getName() + " " + method.getSignature());
 //}
-            if ((method.getModifiers() & Modifier.STATIC) > 0) {
+            if ((method.getModifiers() & Modifier.STATIC) > 0) { // TODO why static is not available?
 //System.err.println("static mathod: " + method);
                 continue;
             }

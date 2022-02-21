@@ -58,6 +58,7 @@ public class FactorGenerator extends Generator<BigInteger> {
         }
         scanner.close();
         wheelTable = temp.toArray(new BigInteger[temp.size()]);
+//System.err.println(wheelTable.length);
     }
 
     /** */
