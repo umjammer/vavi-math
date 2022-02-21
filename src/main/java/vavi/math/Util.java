@@ -6,7 +6,9 @@
 
 package vavi.math;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -68,6 +70,23 @@ public final class Util {
             b = lcm(b, r);
         }
         return b;
+    }
+
+    // @see https://stackoverflow.com/q/4643647/6102938
+    public static BigInteger gcd2(BigInteger a, BigInteger b) {
+        if (a.equals(b)) {
+            return a;
+        }
+        while (b.compareTo(BigInteger.ZERO) > 0) {
+            a = b;
+            b = a.mod(b);
+        }
+        return a;
+    }
+
+    // @see https://stackoverflow.com/q/4643647/6102938
+    public static BigInteger lcm2(BigInteger a, BigInteger b) {
+        return floorDiv(a, a.gcd(b)).multiply(b).abs();
     }
 
     /** */
@@ -170,6 +189,153 @@ public final class Util {
             sum = sum.add(x);
         }
         return sum;
+    }
+
+    /**
+     * jdk9 has this.
+     */
+    public static BigInteger sqrt(BigInteger val) {
+        BigInteger half = BigInteger.ZERO.setBit(val.bitLength() / 2);
+        BigInteger cur = half;
+
+        while (true) {
+            BigInteger tmp = half.add(val.divide(half)).shiftRight(1);
+
+            if (tmp.equals(half) || tmp.equals(cur))
+                return tmp;
+
+            cur = half;
+            half = tmp;
+        }
+    }
+
+    private static final double LOG_2 = Math.log(2.0);
+    private static final double LOG_10 = Math.log(10.0);
+
+    // numbers greater than 10^MAX_DIGITS_10 or e^MAX_DIGITS_E are considered ('too big') for floating point operations
+    private static final int MAX_DIGITS_10 = 294;
+    private static final int MAX_DIGITS_2 = 977; // ~ MAX_DIGITS_10 * LN(10)/LN(2)
+    private static final int MAX_DIGITS_E = 677; // ~ MAX_DIGITS_10 * LN(10)
+
+    /**
+     * Computes the natural logarithm of a {@link BigInteger} 
+     * <p>
+     * Works for really big integers (practically unlimited), even when the argument 
+     * falls outside the {@code double} range
+     * <p>
+     *
+     * @param val Argument
+     * @return Natural logarithm, as in {@link java.lang.Math#log(double)}<br>
+     * {@code Nan} if argument is negative, {@code NEGATIVE_INFINITY} if zero.
+     * @see https://stackoverflow.com/questions/6827516/logarithm-for-biginteger
+     */
+    public static double log(BigInteger val) {
+        if (val.signum() < 1)
+            return val.signum() < 0 ? Double.NaN : Double.NEGATIVE_INFINITY;
+        int blex = val.bitLength() - MAX_DIGITS_2; // any value in 60..1023 works here
+        if (blex > 0)
+            val = val.shiftRight(blex);
+        double res = Math.log(val.doubleValue());
+        return blex > 0 ? res + blex * LOG_2 : res;
+    }
+
+    /**
+     * Computes the natural logarithm of a {@link BigDecimal}
+     * <p>
+     * Works for really big (or really small) arguments, even outside the double range.
+     *
+     * @param val Argument
+     * @return Natural logarithm, as in {@link java.lang.Math#log(double)}<br>
+     * {@code Nan} if argument is negative, {@code NEGATIVE_INFINITY} if zero.
+     * @see https://stackoverflow.com/questions/6827516/logarithm-for-biginteger
+     */
+    public static double log(BigDecimal val) {
+        if (val.signum() < 1)
+            return val.signum() < 0 ? Double.NaN : Double.NEGATIVE_INFINITY;
+        int digits = val.precision() - val.scale();
+        if (digits < MAX_DIGITS_10 && digits > -MAX_DIGITS_10)
+            return Math.log(val.doubleValue());
+        else
+            return log(val.unscaledValue()) - val.scale() * LOG_10;
+    }
+
+    /**
+     * Computes the exponential function, returning a {@link BigDecimal} (precision ~ 16).
+     * <p>
+     * Works for very big and very small exponents, even when the result 
+     * falls outside the double range.
+     *
+     * @param exponent Any finite value (infinite or {@code Nan} throws {@code IllegalArgumentException})    
+     * @return The value of {@code e} (base of the natural logarithms) raised to the given exponent, 
+     * as in {@link java.lang.Math#exp(double)}
+     * @see https://stackoverflow.com/questions/6827516/logarithm-for-biginteger
+     */
+    public static BigDecimal exp(double exponent) {
+        if (!Double.isFinite(exponent))
+            throw new IllegalArgumentException("Infinite not accepted: " + exponent);
+        // e^b = e^(b2+c) = e^b2 2^t with e^c = 2^t 
+        double bc = MAX_DIGITS_E;
+        if (exponent < bc && exponent > -bc)
+            return new BigDecimal(Math.exp(exponent), MathContext.DECIMAL64);
+        boolean neg = false;
+        if (exponent < 0) {
+            neg = true;
+            exponent = -exponent;
+        }
+        double b2 = bc;
+        double c = exponent - bc;
+        int t = (int) Math.ceil(c / LOG_10);
+        c = t * LOG_10;
+        b2 = exponent - c;
+        if (neg) {
+            b2 = -b2;
+            t = -t;
+        }
+        return new BigDecimal(Math.exp(b2), MathContext.DECIMAL64).movePointRight(t);
+    }
+
+    /**
+     * Same as {@link java.lang.Math#pow(double,double)} but returns a {@link BigDecimal} (precision ~ 16).
+     * <p>
+     * Works even for outputs that fall outside the {@code double} range.
+     * <br>
+     * The only limitation is that {@code b * log(a)} cannot exceed the {@code double} range. 
+     * 
+     * @param a Base. Should be non-negative 
+     * @param b Exponent. Should be finite (and non-negative if base is zero)
+     * @return Returns the value of the first argument raised to the power of the second argument.
+     * @see https://stackoverflow.com/questions/6827516/logarithm-for-biginteger
+     */
+    public static BigDecimal pow(double a, double b) {
+        if (!(Double.isFinite(a) && Double.isFinite(b)))
+            throw new IllegalArgumentException(
+                    Double.isFinite(b) ? "base not finite: a=" + a : "exponent not finite: b=" + b);
+        if (b == 0)
+            return BigDecimal.ONE;
+        else if (b == 1)
+            return BigDecimal.valueOf(a);
+        if (a <= 0) {
+            if (a == 0) {
+                if (b >= 0)
+                    return BigDecimal.ZERO;
+                else
+                    throw new IllegalArgumentException("0**negative = infinite b=" + b);
+            } else
+                throw new IllegalArgumentException("negative base a=" + a);
+        }
+        double x = b * Math.log(a);
+        if (Math.abs(x) < MAX_DIGITS_E)
+            return BigDecimal.valueOf(Math.pow(a, b));
+        else
+            return exp(x);
+    }
+
+    // @see https://stackoverflow.com/a/56814650
+    public static BigInteger floorDiv(BigInteger a, BigInteger b) {
+        // divideAndRemainder returns quotient and remainder in array
+        BigInteger[] qr = a.divideAndRemainder(b);  
+        return qr[0].signum() >= 0 || qr[1].signum() == 0 ? 
+             qr[0] : qr[0].subtract(BigInteger.ONE);
     }
 }
 

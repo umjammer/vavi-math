@@ -83,6 +83,24 @@ public class MemoizeTest {
         count++;
         return 0;
     }
+
+    @Memoize
+    int fib(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        int fibForN = fib(n - 1) + fib(n - 2);
+
+        return fibForN;
+    }
+
+    @Test
+    void test4() {
+        assertEquals(1556111435, fib(1000));
+    }
 }
 
 /* */

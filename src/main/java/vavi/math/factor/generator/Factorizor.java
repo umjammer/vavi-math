@@ -6,11 +6,14 @@ package vavi.math.factor.generator;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
+
+import vavi.math.Util;
 
 import static java.math.BigInteger.ONE;
 import static java.math.BigInteger.ZERO;
@@ -18,6 +21,9 @@ import static java.math.BigInteger.ZERO;
 
 /**
  * factorization.
+ *
+ * TODO it takes about 5~7 seconds (pythos3 returns immediately).
+ * TODO BigInteger#gcd, modPow uses mostly of time
  *
  * java9 has {@link BigInteger#TWO}, {@link BigInteger#sqrt()}
  */
@@ -31,38 +37,34 @@ public class Factorizor {
     private final static BigInteger FOUR = new BigInteger("4");
     private final static BigInteger SIX = new BigInteger("6");
 
-    // TODO too slow use prepared table
     // http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188
-    // Input N>=6, Returns a list of primes, 2 <= p < N
-    private Set<BigInteger> primesbelow(BigInteger N) {
-        boolean correction = N.mod(SIX).compareTo(ONE) > 0;
-        N = new BigInteger[] { N, N.subtract(ONE), N.add(FOUR), N.add(THREE), N.add(TWO), N.add(ONE) }[N.mod(SIX).intValue()];
-        boolean[] sieve = new boolean[N.divide(THREE).intValue()];
+    // Input n >= 6, Returns a list of primes, 2 <= p < n
+    private static Set<BigInteger> primesBelow(BigInteger n) {
+        boolean correction = n.mod(SIX).compareTo(ONE) > 0;
+        n = new BigInteger[] { n, n.subtract(ONE), n.add(FOUR), n.add(THREE), n.add(TWO), n.add(ONE) }[n.mod(SIX).intValue()];
+        boolean[] sieve = new boolean[Util.floorDiv(n, THREE).intValue()];
         for (int i = 1; i < sieve.length; i++) { sieve[i] = true; }
         sieve[0] = false;
-        for (int i = 0; i < sqrt(N).intValue() / 3 + 1; i++) {
+        for (int i = 0; i < Math.floorDiv(Util.sqrt(n).intValue(), 3) + 1; i++) {
             if (sieve[i]) {
                 int k = (3 * i + 1) | 1;
-                for (int j = k * k / 3; j < sieve.length; j += 2 * k) {
-                    for (int l = 0; l < (N.divide(SIX).intValue() - (k * k) / 6 - 1) / k + 1; l++) {
-                        if (j + l < sieve.length) {
-                            sieve[j + l] = false;
-                        }
-                    }
+//System.err.println("1: [" + (k * k / 3) + "::" + (2 * k) + "] = " + (Math.floorDiv((n.divide(SIX).intValue() - Math.floorDiv(k * k, 6) - 1), k) + 1) + ", " + k + ", " + n.divide(SIX).intValue() + ", " + Math.floorDiv((k * k), 6));
+                for (int l = 0; l < Math.floorDiv((n.divide(SIX).intValue() - Math.floorDiv(k * k, 6) - 1), k) + 1; l++) {
+                    sieve[Math.floorDiv(k * k, 3) + l * (2 * k)] = false;
                 }
-                for (int j = (k * k + 4 * k - 2 * k * (i % 2)) / 3; j < sieve.length; j += 2 * k) {
-                    for (int l = 0; l < (N.divide(SIX).intValue() - (k * k + 4 * k - 2 * k * (i % 2)) / 6 - 1) / k + 1; l++) {
-                        if (j + l < sieve.length) {
-                            sieve[j + l] = false;
-                        }
-                    }
+//System.err.println("2: [" + Math.floorDiv(k * k + 4 * k - 2 * k * (i % 2), 3) + "::" + (2 * k) + "] = " + (Math.floorDiv(n.divide(SIX).intValue() - Math.floorDiv(k * k + 4 * k - 2 * k * (i % 2), 6) - 1, k) + 1));
+                for (int l = 0; l < Math.floorDiv(n.divide(SIX).intValue() - Math.floorDiv(k * k + 4 * k - 2 * k * (i % 2), 6) - 1, k) + 1; l++) {
+                    sieve[Math.floorDiv(k * k + 4 * k - 2 * k * (i % 2), 3) + l * (2 * k)] = false;
                 }
             }
         }
         Set<BigInteger> r = new HashSet<>();
         r.add(TWO);
         r.add(THREE);
-        for (BigInteger i = ONE; i.compareTo(N.divide(THREE).subtract(correction ? ONE : ZERO)) < 0; i.add(ONE)) {
+//System.err.println("range: " + Util.floorDiv(n, THREE).subtract(correction ? ONE : ZERO));
+//for (int i = 1; i < Util.floorDiv(n, THREE).subtract(correction ? ONE : ZERO).intValue(); i++) { System.err.printf("{%d: '%s'}, ", i, sieve[i] ? "T" : "F"); } System.err.println();
+        for (BigInteger i = ONE; i.compareTo(Util.floorDiv(n, THREE).subtract(correction ? ONE : ZERO)) < 0; i = i.add(ONE)) {
+//System.err.println("i: " + i + ", " + i.compareTo(N.divide(THREE).subtract(correction ? ONE : ZERO)));
             if (sieve[i.intValue()]) {
                 r.add(THREE.multiply(i).add(ONE).or(ONE));
             }
@@ -70,25 +72,25 @@ public class Factorizor {
         return r;
     }
 
-    private static final BigInteger _smallprimeset = new BigInteger("100000");
-    private final Set<BigInteger> smallprimeset = primesbelow(_smallprimeset);
+    private static final BigInteger OHT = BigInteger.valueOf(100000);
+    private static final Set<BigInteger> smallPrimeSet = primesBelow(OHT);
 
     // http://en.wikipedia.org/wiki/Miller-Rabin_primality_test#Algorithm_and_running_time
-    private boolean isprime(BigInteger n, int precision/*=7*/) {
+    private static boolean isPrime(BigInteger n, int precision/*=7*/) {
         if (n.compareTo(ONE) < 0) {
             throw new IllegalArgumentException("Out of bounds, first argument must be > 0");
         } else if (n.compareTo(THREE) <= 0) {
             return n.compareTo(TWO) >= 0;
         } else if (n.mod(TWO) == ZERO) {
             return false;
-        } else if (n.compareTo(_smallprimeset) < 0) {
-            return smallprimeset.contains(n);
+        } else if (n.compareTo(OHT) < 0) {
+            return smallPrimeSet.contains(n);
         }
 
         BigInteger d = n.subtract(ONE);
         BigInteger s = ZERO;
         while (d.mod(TWO) == ZERO) {
-            d = d.divide(TWO);
+            d = Util.floorDiv(d, TWO);
             s = s.add(ONE);
         }
 
@@ -98,7 +100,7 @@ public class Factorizor {
 
             if (x == ONE || x == n.subtract(ONE)) { continue; }
 
-            for (BigInteger r = ZERO; r.compareTo(s.subtract(ONE)) < 0; r.add(ONE)) {
+            for (BigInteger r = ZERO; r.compareTo(s.subtract(ONE)) < 0; r = r.add(ONE)) {
                 x = x.modPow(TWO, n);
                 if (x == ONE) { return false; }
                 if (x == n.subtract(ONE)) { break; }
@@ -110,7 +112,7 @@ public class Factorizor {
     }
 
     // https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/
-    private BigInteger pollard_brent(BigInteger n) {
+    private static BigInteger pollardBrent(BigInteger n) {
         if (n.mod(TWO) == ZERO) { return TWO; }
         if (n.mod(THREE) == ZERO) { return THREE; }
 
@@ -122,13 +124,13 @@ public class Factorizor {
         BigInteger ys = null;
         while (g == ONE) {
             x = y;
-            for (BigInteger i = ZERO; i.compareTo(r) < 0; i.add(ONE)) {
+            for (BigInteger i = ZERO; i.compareTo(r) < 0; i = i.add(ONE)) {
                 y = y.modPow(TWO, n).add(c).mod(n);
             }
             BigInteger k = ZERO;
             while (k.compareTo(r) < 0 && g == ONE) {
                 ys = y;
-                for (BigInteger i = ZERO; i.compareTo(m.min(r.subtract(k))) < 0; i.add(ONE)) {
+                for (BigInteger i = ZERO; i.compareTo(m.min(r.subtract(k))) < 0; i = i.add(ONE)) {
                     y = y.modPow(TWO, n).add(c).mod(n);
                     q = q.multiply(x.subtract(y).abs()).mod(n);
                 }
@@ -151,15 +153,15 @@ public class Factorizor {
     }
 
     // might seem low, but 1000*1000 = 1000000, so this will fully factor every composite < 1000000
-    private final Set<BigInteger> smallprimes = primesbelow(new BigInteger("1000"));
+    private static final Set<BigInteger> smallPrimes = primesBelow(BigInteger.valueOf(1000));
 
-    public Set<BigInteger> primefactors(BigInteger n, boolean sort/*=false*/) {
-        Set<BigInteger> factors = new HashSet<>();
+    public static Collection<BigInteger> primeFactors(BigInteger n) {
+        Collection<BigInteger> factors = new ArrayList<>();
 
-        for (BigInteger checker : smallprimes) {
+        for (BigInteger checker : smallPrimes) {
             while (n.mod(checker) == ZERO) {
                 factors.add(checker);
-                n = n.divide(checker);
+                n = Util.floorDiv(n, checker);
             }
             if (checker.compareTo(n) > 0) { break; }
         }
@@ -167,25 +169,23 @@ public class Factorizor {
         if (n.compareTo(TWO) < 0) { return factors; }
 
         while (n.compareTo(ONE) > 0) {
-            if (isprime(n, 7)) {
+            if (isPrime(n, 7)) {
                 factors.add(n);
                 break;
             }
             //  trial division did not fully factor, switch to pollard-brent
-            BigInteger factor = pollard_brent(n);
+            BigInteger factor = pollardBrent(n);
             //  recurse to factor the not necessarily prime factor returned by pollard-brent
-            factors.addAll(primefactors(factor, sort));
-            n = n.divide(factor);
+            factors.addAll(primeFactors(factor));
+            n = Util.floorDiv(n, factor);
         }
-
-        if (sort) { new TreeSet<>(factors); }
 
         return factors;
     }
 
-    public Map<BigInteger, Integer> factorization(BigInteger n) {
+    public static Map<BigInteger, Integer> factorization(BigInteger n) {
         Map<BigInteger, Integer> factors = new HashMap<>();
-        for (BigInteger p1 : primefactors(n, false)) {
+        for (BigInteger p1 : primeFactors(n)) {
             if (factors.containsKey(p1)) {
                 factors.put(p1, factors.get(p1) + 1);
             } else {
@@ -195,9 +195,9 @@ public class Factorizor {
         return factors;
     }
 
-    private Map<BigInteger, BigInteger> totients = new HashMap<>();
+    private static Map<BigInteger, BigInteger> totients = new HashMap<>();
 
-    private BigInteger totient(BigInteger n) {
+    public static BigInteger totient(BigInteger n) {
         if (n == ZERO) { return ONE; }
 
         if (totients.containsKey(n)) {
@@ -214,28 +214,9 @@ public class Factorizor {
         return tot;
     }
 
-//    BigInteger gcd(BigInteger a, BigInteger b) {
-//        if (a == b) { return a; }
-//        while (b.compareTo(ZERO) > 0) { a = b; b = a.mod(b); }
-//        return a;
-//    }
-
-//    private BigInteger lcm(BigInteger a, BigInteger b) {
-//        return a.divide(a.gcd(b)).multiply(b).abs();
-//    }
-
-    private static BigInteger sqrt(BigInteger val) {
-        BigInteger half = BigInteger.ZERO.setBit(val.bitLength() / 2);
-        BigInteger cur = half;
-
-        while (true) {
-            BigInteger tmp = half.add(val.divide(half)).shiftRight(1);
-
-            if (tmp.equals(half) || tmp.equals(cur))
-                return tmp;
-
-            cur = half;
-            half = tmp;
+    public static void main(String[] args) throws Exception {
+        for (int i = 10; i < 100; i++) {
+            System.err.println(i + ": " + primesBelow(BigInteger.valueOf(i)).toString());
         }
     }
 }

@@ -15,9 +15,7 @@
     <name></name>
   </organization>
   <url>https://github.com/umjammer/vavi-math</url>
-  <description>0.0.2
-
-    add memoization</description>
+  <description></description>
   <scm>
     <url>https://github.com/umjammer/vavi-math</url>
   </scm>
@@ -27,9 +25,9 @@
 
   <distributionManagement>
     <repository>
-      <id>bintray</id>
-      <name>umjammer-maven</name>
-      <url>https://api.bintray.com/maven/umjammer/maven/vavi-memoization/;publish=1</url>
+      <id>github</id>
+      <name>GitHub umjammer Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/umjammer/vavi-math</url>
     </repository>
   </distributionManagement>
 
@@ -138,13 +136,28 @@
             <argument>-Dversion=${project.version}</argument>
             <argument>-Dpackaging=jar</argument>
             <argument>-Dfile=${project.build.directory}/vavi-memoization-${project.version}.jar</argument>
-            <argument>-DrepositoryId=bintray</argument>
-            <argument>-Durl=https://api.bintray.com/maven/umjammer/maven/vavi-memoization</argument>
+            <argument>-DrepositoryId=github</argument>
+            <argument>-Durl=https://maven.pkg.github.com/umjammer/vavi-math</argument>
+            <argument>-DgeneratePom=false</argument>
+            <argument>-s</argument>
+            <argument>${env.GITHUB_WORKSPACE}/settings.xml</argument>
           </arguments>
         </configuration>
       </plugin>
     </plugins>
   </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>5.8.1</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>
@@ -157,19 +170,16 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.3.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.3.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.platform</groupId>
       <artifactId>junit-platform-commons</artifactId>
-      <version>1.5.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
