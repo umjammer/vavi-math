@@ -82,7 +82,7 @@ public class TotientSerialCalculator {
         nextPrime = 1;
         // Map (and Remap) the window with sqrt(N) numbers, sqrt(N) times to
         // sequentially map all of the numbers <= N.
-        for (; firstValue <= N;) {
+        while (firstValue <= N) {
             primeIndex = 0;
             // note: cant use enumerator for the loop below because NextPrime
             //  changes during the first window as new primes <= SQRT(N) are accumulated
@@ -91,7 +91,7 @@ public class TotientSerialCalculator {
                 p = primes[(int) primeIndex];
                 // find the first multiple of (p) in the current window range
                 k = prevLast + (p - (prevLast % p));
-                for (; k < nextFirst;) {
+                while (k < nextFirst) {
                     numbers[(int) (k - firstValue)].unFactored = numbers[(int) (k - firstValue)].unFactored / p;
                     // always works the first time'
                     numbers[(int) (k - firstValue)].phi = numbers[(int) (k - firstValue)].phi * (p - 1);
@@ -175,7 +175,7 @@ public class TotientSerialCalculator {
     /**
      * estimate of pi(n) == {primes <= (n)} that is
      * never less than the actual number of primes.
-     * @see P. Dusart, 1999
+     * @see "P. Dusart, 1999"
      */
     long piMax(long x) {
         return (long) ((x / Math.log(x)) * (1 + (1.2762 / Math.log(x))));

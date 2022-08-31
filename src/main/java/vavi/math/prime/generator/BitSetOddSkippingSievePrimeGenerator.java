@@ -20,7 +20,7 @@ public class BitSetOddSkippingSievePrimeGenerator extends Generator<Integer> {
 
     private void getPrimes(int maxPrime) {
 
-        /**
+        /*
          * array where index represents odd number, eg if primes[x] = true then
          * (x*2)+1 is prime.
          */
@@ -44,7 +44,7 @@ public class BitSetOddSkippingSievePrimeGenerator extends Generator<Integer> {
             // rolled out like this to prevent needing division to get index
             i += 2;
             int k = i / 2;
-            while (primes.get(k) == false) {
+            while (!primes.get(k)) {
                 k++;
             }
             i = (k * 2) + 1;

@@ -17,7 +17,7 @@ public class SimplePrimeGenerator extends Generator<Integer> {
 
     private void getPrimes(int maxPrime) {
 
-        /**
+        /*
          * cycle through checking if a numbers prime. To save time, only check
          * odd numbers. Since we are only checking odd numbers we only have to
          * consider odd multiples.

@@ -55,7 +55,7 @@ public class CombinationGenerator implements Iterator<int[]>, Iterable<int[]> {
 
     /** Are there more combinations? */
     public boolean hasNext() {
-        return numLeft.compareTo(BigInteger.ZERO) == 1;
+        return numLeft.compareTo(BigInteger.ZERO) > 0;
     }
 
     /** Return total number of combinations */

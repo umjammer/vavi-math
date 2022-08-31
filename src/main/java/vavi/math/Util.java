@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -28,11 +27,14 @@ import vavi.math.factor.FactorGenerator;
  */
 public final class Util {
 
+    /** */
+    public static final BigInteger TWO = BigInteger.valueOf(2);
+
     private Util() {}
 
     /** use {@link BigInteger#gcd(BigInteger)} */
     @Deprecated
-    public static final BigInteger gcd(BigInteger a, BigInteger b) {
+    public static BigInteger gcd(BigInteger a, BigInteger b) {
         if (a.compareTo(b) < 0) {
             return gcd(b, a);
         } else {
@@ -46,7 +48,7 @@ public final class Util {
     }
 
     /** */
-    public static final int gcd(int x, int y) {
+    public static int gcd(int x, int y) {
         int wk = 1;
         x *= Integer.signum(x); // make it unsigned
         y *= Integer.signum(y);
@@ -157,7 +159,7 @@ public final class Util {
      * @return sorted
      */
     public static List<BigInteger> divisors(Map<BigInteger, Integer> entries) {
-        return divisors(Arrays.asList(BigInteger.ONE), entries.entrySet().iterator());
+        return divisors(Collections.singletonList(BigInteger.ONE), entries.entrySet().iterator());
     }
 
     /**
@@ -227,7 +229,7 @@ public final class Util {
      * @param val Argument
      * @return Natural logarithm, as in {@link java.lang.Math#log(double)}<br>
      * {@code Nan} if argument is negative, {@code NEGATIVE_INFINITY} if zero.
-     * @see https://stackoverflow.com/questions/6827516/logarithm-for-biginteger
+     * @see "https://stackoverflow.com/questions/6827516/logarithm-for-biginteger"
      */
     public static double log(BigInteger val) {
         if (val.signum() < 1)
@@ -247,7 +249,7 @@ public final class Util {
      * @param val Argument
      * @return Natural logarithm, as in {@link java.lang.Math#log(double)}<br>
      * {@code Nan} if argument is negative, {@code NEGATIVE_INFINITY} if zero.
-     * @see https://stackoverflow.com/questions/6827516/logarithm-for-biginteger
+     * @see "https://stackoverflow.com/questions/6827516/logarithm-for-biginteger"
      */
     public static double log(BigDecimal val) {
         if (val.signum() < 1)
@@ -268,7 +270,7 @@ public final class Util {
      * @param exponent Any finite value (infinite or {@code Nan} throws {@code IllegalArgumentException})    
      * @return The value of {@code e} (base of the natural logarithms) raised to the given exponent, 
      * as in {@link java.lang.Math#exp(double)}
-     * @see https://stackoverflow.com/questions/6827516/logarithm-for-biginteger
+     * @see "https://stackoverflow.com/questions/6827516/logarithm-for-biginteger"
      */
     public static BigDecimal exp(double exponent) {
         if (!Double.isFinite(exponent))
@@ -304,7 +306,7 @@ public final class Util {
      * @param a Base. Should be non-negative 
      * @param b Exponent. Should be finite (and non-negative if base is zero)
      * @return Returns the value of the first argument raised to the power of the second argument.
-     * @see https://stackoverflow.com/questions/6827516/logarithm-for-biginteger
+     * @see "https://stackoverflow.com/questions/6827516/logarithm-for-biginteger"
      */
     public static BigDecimal pow(double a, double b) {
         if (!(Double.isFinite(a) && Double.isFinite(b)))

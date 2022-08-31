@@ -20,7 +20,7 @@ public class SkippingSievePrimeGenerator extends Generator<Integer> {
 
     private void getPrimes(int maxPrime) {
 
-        /**
+        /*
          * array where index represents its own number, eg if primes[x] = true
          * then x is prime.
          */
@@ -43,7 +43,7 @@ public class SkippingSievePrimeGenerator extends Generator<Integer> {
 
             do {
                 i += 2;
-            } while (primes[i] == false);
+            } while (!primes[i]);
         }
 
         for (int i = 3; i <= maxPrime; i += 2) {

@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import vavi.math.Util;
@@ -22,7 +23,7 @@ import static java.math.BigInteger.ZERO;
 /**
  * factorization.
  *
- * TODO it takes about 5~7 seconds (pythos3 returns immediately).
+ * TODO it takes about 5~7 seconds (python3 returns immediately).
  * TODO BigInteger#gcd, modPow uses mostly of time
  *
  * java9 has {@link BigInteger#TWO}, {@link BigInteger#sqrt()}
@@ -81,7 +82,7 @@ public class Factorizor {
             throw new IllegalArgumentException("Out of bounds, first argument must be > 0");
         } else if (n.compareTo(THREE) <= 0) {
             return n.compareTo(TWO) >= 0;
-        } else if (n.mod(TWO) == ZERO) {
+        } else if (n.mod(TWO).equals(ZERO)) {
             return false;
         } else if (n.compareTo(OHT) < 0) {
             return smallPrimeSet.contains(n);
@@ -89,7 +90,7 @@ public class Factorizor {
 
         BigInteger d = n.subtract(ONE);
         BigInteger s = ZERO;
-        while (d.mod(TWO) == ZERO) {
+        while (d.mod(TWO).equals(ZERO)) {
             d = Util.floorDiv(d, TWO);
             s = s.add(ONE);
         }
@@ -98,12 +99,12 @@ public class Factorizor {
             BigInteger a = new BigInteger(n.bitLength(), random); // TODO 2, n - 2;
             BigInteger x = a.modPow(d, n);
 
-            if (x == ONE || x == n.subtract(ONE)) { continue; }
+            if (x.equals(ONE) || x.equals(n.subtract(ONE))) { continue; }
 
             for (BigInteger r = ZERO; r.compareTo(s.subtract(ONE)) < 0; r = r.add(ONE)) {
                 x = x.modPow(TWO, n);
-                if (x == ONE) { return false; }
-                if (x == n.subtract(ONE)) { break; }
+                if (x.equals(ONE)) { return false; }
+                if (x.equals(n.subtract(ONE))) { break; }
             }
             return false;
         }
@@ -113,8 +114,8 @@ public class Factorizor {
 
     // https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/
     private static BigInteger pollardBrent(BigInteger n) {
-        if (n.mod(TWO) == ZERO) { return TWO; }
-        if (n.mod(THREE) == ZERO) { return THREE; }
+        if (n.mod(TWO).equals(ZERO)) { return TWO; }
+        if (n.mod(THREE).equals(ZERO)) { return THREE; }
 
         BigInteger y = new BigInteger(n.bitLength(), random);
         BigInteger c = new BigInteger(n.bitLength(), random); // TODO 1, n - 1
@@ -122,13 +123,13 @@ public class Factorizor {
         BigInteger g = ONE, r = ONE, q = ONE;
         BigInteger x = null;
         BigInteger ys = null;
-        while (g == ONE) {
+        while (g.equals(ONE)) {
             x = y;
             for (BigInteger i = ZERO; i.compareTo(r) < 0; i = i.add(ONE)) {
                 y = y.modPow(TWO, n).add(c).mod(n);
             }
             BigInteger k = ZERO;
-            while (k.compareTo(r) < 0 && g == ONE) {
+            while (k.compareTo(r) < 0 && g.equals(ONE)) {
                 ys = y;
                 for (BigInteger i = ZERO; i.compareTo(m.min(r.subtract(k))) < 0; i = i.add(ONE)) {
                     y = y.modPow(TWO, n).add(c).mod(n);
@@ -139,7 +140,7 @@ public class Factorizor {
             }
             r = r.multiply(TWO);
         }
-        if (g == n) {
+        if (g.equals(n)) {
             while (true) {
                 ys = ys.modPow(TWO, n).add(c).mod(n);
                 g = x.subtract(ys).abs().gcd(n);
@@ -159,7 +160,7 @@ public class Factorizor {
         Collection<BigInteger> factors = new ArrayList<>();
 
         for (BigInteger checker : smallPrimes) {
-            while (n.mod(checker) == ZERO) {
+            while (n.mod(checker).equals(ZERO)) {
                 factors.add(checker);
                 n = Util.floorDiv(n, checker);
             }
@@ -198,7 +199,7 @@ public class Factorizor {
     private static Map<BigInteger, BigInteger> totients = new HashMap<>();
 
     public static BigInteger totient(BigInteger n) {
-        if (n == ZERO) { return ONE; }
+        if (Objects.equals(n, ZERO)) { return ONE; }
 
         if (totients.containsKey(n)) {
             return totients.get(n);

@@ -24,10 +24,10 @@ public class OkumuraCRC16 {
      * @param c given data
      * @return CRC value
      */
-    public int update(byte c[]) {
+    public int update(byte[] c) {
 
-        for (int i = 0; i < c.length; i++) {
-            crc ^= (c[i] & 0xff) << (16 - BYTE_BIT);
+        for (byte b : c) {
+            crc ^= (b & 0xff) << (16 - BYTE_BIT);
             for (int j = 0; j < BYTE_BIT; j++) {
                 if ((crc & 0x8000) != 0) {
                     crc = (crc << 1) ^ CRCPOLY1;

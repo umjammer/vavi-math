@@ -48,7 +48,7 @@ public class OddSkippingSievePrimeGenerator extends Generator<Integer> {
             // rolled out like this to prevent needing division to get index
             i += 2;
             int k = i / 2;
-            while (primes[k] == false) {
+            while (!primes[k]) {
                 k++;
             }
             i = (k * 2) + 1;

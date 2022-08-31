@@ -34,7 +34,7 @@ public class SievePrimeGenerator extends Generator<Integer> {
 
             do {
                 i++;
-            } while (primes[i] == false);
+            } while (!primes[i]);
             // System.out.println(i);
         }
 

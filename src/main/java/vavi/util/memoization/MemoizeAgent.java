@@ -102,8 +102,8 @@ public class MemoizeAgent implements ClassFileTransformer {
     /** */
     private boolean isMemorizedMethod(CtMethod method) throws Exception {
         for (Object annotation : method.getAnnotations()) {
-            if (Memoize.class.isInstance(annotation)) {
-                Memoize memoize = Memoize.class.cast(annotation);
+            if (annotation instanceof Memoize) {
+                Memoize memoize = (Memoize) annotation;
                 if (memoize.debug()) {
                     System.err.println("@vavi.util.memoization.Memoize: detect: " + method.getName() + " " + method.getSignature());
                 }
@@ -116,8 +116,8 @@ public class MemoizeAgent implements ClassFileTransformer {
     /** */
     private boolean isDebugMemorizedMethod(CtMethod method) throws Exception {
         for (Object annotation : method.getAnnotations()) {
-            if (Memoize.class.isInstance(annotation)) {
-                Memoize memoize = Memoize.class.cast(annotation);
+            if (annotation instanceof Memoize) {
+                Memoize memoize = (Memoize) annotation;
                 if (memoize.debug()) {
                     return true;
                 }

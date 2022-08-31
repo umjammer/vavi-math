@@ -27,7 +27,7 @@ public class Args {
 
     public boolean equals(Object o) {
         if (o instanceof Args) {
-            return Arrays.deepEquals(this.args, Args.class.cast(o).args);
+            return Arrays.deepEquals(this.args, ((Args) o).args);
         }
         return false;
     }

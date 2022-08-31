@@ -62,7 +62,7 @@ class Montgomery {
         BigInteger p = reduction(a.multiply(m_r2));
         BigInteger x = reduction(m_r2);
         BigInteger y = b;
-        while (y.compareTo(BigInteger.ZERO) == 1) {
+        while (y.compareTo(BigInteger.ZERO) > 0) {
             if (!y.and(BigInteger.ONE).equals(BigInteger.ZERO)) {
                 x = reduction(x.multiply(p));
             }

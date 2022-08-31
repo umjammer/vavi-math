@@ -74,7 +74,7 @@ public class PermutationGenerator implements Iterator<int[]>, Iterable<int[]> {
      * Are there more permutations?
      */
     public boolean hasNext() {
-        return numLeft.compareTo(BigInteger.ZERO) == 1;
+        return numLeft.compareTo(BigInteger.ZERO) > 0;
     }
 
     /**

@@ -77,7 +77,7 @@ public class Rpn {
                         stack.push(b / a);
                         break;
                     default:
-                        throw new IllegalArgumentException("unsupported operator: " + part.substring(i, i + 1));
+                        throw new IllegalArgumentException("unsupported operator: " + part.charAt(i));
                     }
                 }
             }
@@ -121,7 +121,7 @@ public class Rpn {
                         stack.push(b.divide(a));
                         break;
                     default:
-                        throw new IllegalArgumentException("unsupported operator: " + part.substring(i, i + 1));
+                        throw new IllegalArgumentException("unsupported operator: " + part.charAt(i));
                     }
                 }
             }
@@ -136,17 +136,17 @@ public class Rpn {
     /**
      * not thread safe
      * @param expr is only Rational value, and char operator accepted.
-     * @throws ClassCastException
+     * @throws ClassCastException an expression is not rational nor op
      * @see #stack
      */
     public Rational rationalValue(Object[] expr) throws RationalException {
         stack.clear();
         for (Object obj : expr) {
-            if (Rational.class.isInstance(obj)) {
-                stack.push(Rational.class.cast(obj));
+            if (obj instanceof Rational) {
+                stack.push((Rational) obj);
             } else {
                 Rational a, b;
-                switch (Op.class.cast(obj)) {
+                switch ((Op) obj) {
                 case ADD:
                     a = stack.pop();
                     b = stack.pop();
@@ -238,8 +238,8 @@ public class Rpn {
         Deque<Intermediate> stack = new ArrayDeque<>();
 
         for (Object token : postfixTokens) {
-            if (Op.class.isInstance(token)) {
-                token = Op.class.cast(token).string;
+            if (token instanceof Op) {
+                token = ((Op) token).string;
             }
             if (token.equals(Op.ADD.string) || token.equals(Op.SUBTRACT.string)) {
                 // Get the left and right operands from the stack.
@@ -253,7 +253,7 @@ public class Rpn {
                 String newExpr = leftIntermediate.expr + " " + token + " " + rightIntermediate.expr;
 
                 // Push the new intermediate expression on the stack
-                stack.push(new Intermediate(newExpr, String.class.cast(token)));
+                stack.push(new Intermediate(newExpr, (String) token));
             } else if (token.equals(Op.MULTIPLY.string) || token.equals(Op.DIVIDE.string)) {
                 String leftExpr, rightExpr;
 
@@ -281,7 +281,7 @@ public class Rpn {
                 String newExpr = leftExpr + " " + token + " " + rightExpr;
 
                 // Push the new intermediate expression on the stack
-                stack.push(new Intermediate(newExpr, String.class.cast(token)));
+                stack.push(new Intermediate(newExpr, (String) token));
             } else {
                 // Must be a number. Push it on the stack.
                 stack.push(new Intermediate(String.valueOf(token), ""));

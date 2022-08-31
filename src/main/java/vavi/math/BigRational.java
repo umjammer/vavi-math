@@ -93,8 +93,8 @@ public class BigRational extends Number implements Comparable<BigRational> {
 
     @Override
     public boolean equals(Object x) {
-        if (x != null && BigRational.class.isInstance(x)) {
-            BigRational r = BigRational.class.cast(x);
+        if (x instanceof BigRational) {
+            BigRational r = (BigRational) x;
             return this.numerator.equals(r.numerator) && this.denominator.equals(r.denominator);
         } else {
             return false;

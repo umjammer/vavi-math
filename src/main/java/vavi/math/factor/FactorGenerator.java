@@ -58,7 +58,7 @@ public class FactorGenerator implements Iterator<BigInteger>, Iterable<BigIntege
             temp.add(BigInteger.valueOf(i));
         }
         scanner.close();
-        wheelTable = temp.toArray(new BigInteger[temp.size()]);
+        wheelTable = temp.toArray(new BigInteger[0]);
     }
 
     /** */

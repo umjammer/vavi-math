@@ -53,7 +53,7 @@ public abstract class StringUtil {
     public static <T> String toSequence(Iterable<T> i) {
         StringBuilder sb = new StringBuilder("[");
         for (T e : i) {
-            sb.append(e + ", ");
+            sb.append(e).append(", ");
         }
         sb.setLength(sb.length() - 2);
         sb.append("]");
@@ -64,7 +64,7 @@ public abstract class StringUtil {
     public static <T> String toSequence(T[] i) {
         StringBuilder sb = new StringBuilder("[");
         for (T e : i) {
-            sb.append(e + ", ");
+            sb.append(e).append(", ");
         }
         sb.setLength(sb.length() - 2);
         sb.append("]");
@@ -75,7 +75,7 @@ public abstract class StringUtil {
     public static String toSequence(int[] i) {
         StringBuilder sb = new StringBuilder("[");
         for (int e : i) {
-            sb.append(e + ", ");
+            sb.append(e).append(", ");
         }
         sb.setLength(sb.length() - 2);
         sb.append("]");
@@ -86,7 +86,7 @@ public abstract class StringUtil {
     public static String toSequence(long[] i) {
         StringBuilder sb = new StringBuilder("[");
         for (long e : i) {
-            sb.append(e + ", ");
+            sb.append(e).append(", ");
         }
         sb.setLength(sb.length() - 2);
         sb.append("]");

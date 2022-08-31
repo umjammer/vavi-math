@@ -38,7 +38,7 @@ public class Rational extends Number implements Cloneable, Comparable<Rational> 
     }
 
     /** */
-    private static final int gcd(int x, int y) {
+    private static int gcd(int x, int y) {
         int wk = 1;
         x *= Integer.signum(x); // make those unsigned
         y *= Integer.signum(y);
@@ -112,8 +112,8 @@ public class Rational extends Number implements Cloneable, Comparable<Rational> 
     }
 
     public boolean equals(Object x) {
-        if (x != null && Rational.class.isInstance(x)) {
-            Rational r = Rational.class.cast(x);
+        if (x instanceof Rational) {
+            Rational r = (Rational) x;
             return this.numerator == r.numerator && this.denominator == r.denominator;
         } else {
             return false;
