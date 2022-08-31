@@ -28,8 +28,8 @@ public class OddSkippingSievePrimeGenerator implements Iterator<Integer>, Iterab
      */
     public OddSkippingSievePrimeGenerator(int maxPrime) {
 
-        /**
-         * array where index represents odd number, eg if primes[x] = true then
+        /*
+         * array where index represents odd number, e.g. if primes[x] = true then
          * (x*2)+1 is prime.
          */
         boolean[] primeFlags = new boolean[maxPrime / 2 + 1];
@@ -43,7 +43,7 @@ public class OddSkippingSievePrimeGenerator implements Iterator<Integer>, Iterab
 
         // get next prime
         for (int i = 3; i <= rootMP;) {
-            // use prime to amrk off all mutiples as not prime
+            // use prime to mark off all multiples as not prime
             for (int j = ((i * 3) / 2); j <= halfMax; j += i) {
                 primeFlags[j] = false;
             }
@@ -52,7 +52,7 @@ public class OddSkippingSievePrimeGenerator implements Iterator<Integer>, Iterab
             // rolled out like this to prevent needing division to get index
             i += 2;
             int k = i / 2;
-            while (primeFlags[k] == false) {
+            while (!primeFlags[k]) {
                 k++;
             }
             i = (k * 2) + 1;

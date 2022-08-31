@@ -59,7 +59,7 @@ public class MemoizeAgent implements ClassFileTransformer {
 //if (newClass.getName().startsWith("vavi.util")) {
 //System.err.println("memoize: " + newClass.getName() + ": " + method.getName() + " " + method.getSignature());
 //}
-            if ((method.getModifiers() & Modifier.STATIC) > 0) {
+            if ((method.getModifiers() & Modifier.STATIC) > 0) { // TODO why static is not available?
 //System.err.println("static mathod: " + method);
                 continue;
             }
@@ -102,8 +102,8 @@ public class MemoizeAgent implements ClassFileTransformer {
     /** */
     private boolean isMemorizedMethod(CtMethod method) throws Exception {
         for (Object annotation : method.getAnnotations()) {
-            if (Memoize.class.isInstance(annotation)) {
-                Memoize memoize = Memoize.class.cast(annotation);
+            if (annotation instanceof Memoize) {
+                Memoize memoize = (Memoize) annotation;
                 if (memoize.debug()) {
                     System.err.println("@vavi.util.memoization.Memoize: detect: " + method.getName() + " " + method.getSignature());
                 }
@@ -116,8 +116,8 @@ public class MemoizeAgent implements ClassFileTransformer {
     /** */
     private boolean isDebugMemorizedMethod(CtMethod method) throws Exception {
         for (Object annotation : method.getAnnotations()) {
-            if (Memoize.class.isInstance(annotation)) {
-                Memoize memoize = Memoize.class.cast(annotation);
+            if (annotation instanceof Memoize) {
+                Memoize memoize = (Memoize) annotation;
                 if (memoize.debug()) {
                     return true;
                 }

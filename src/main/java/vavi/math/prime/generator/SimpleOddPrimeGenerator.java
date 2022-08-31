@@ -19,7 +19,7 @@ public class SimpleOddPrimeGenerator extends Generator<Integer> {
 
         yield(2);
 
-        /**
+        /*
          * cycle through checking if a numbers prime. To save time, only check
          * odd numbers. Since we are only checking odd numbers we only have to
          * consider odd multiples.

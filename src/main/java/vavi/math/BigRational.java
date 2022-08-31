@@ -91,21 +91,24 @@ public class BigRational extends Number implements Comparable<BigRational> {
         return new BigRational(this.numerator.multiply(b.getDenominator()), this.denominator.multiply(b.getNumerator()));
     }
 
+    @Override
     public boolean equals(Object x) {
-        if (x != null && BigRational.class.isInstance(x)) {
-            BigRational r = BigRational.class.cast(x);
+        if (x instanceof BigRational) {
+            BigRational r = (BigRational) x;
             return this.numerator.equals(r.numerator) && this.denominator.equals(r.denominator);
         } else {
             return false;
         }
     }
 
+    @Override
     public int compareTo(BigRational b) {
         BigInteger x = this.numerator.multiply(b.getDenominator());
         BigInteger y = b.getNumerator().multiply(this.denominator);
         return x.compareTo(y);
     }
 
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.numerator);
@@ -115,18 +118,22 @@ public class BigRational extends Number implements Comparable<BigRational> {
         return sb.toString();
     }
 
+    @Override
     public double doubleValue() {
         return numerator.divide(denominator).doubleValue();
     }
 
+    @Override
     public float floatValue() {
         return numerator.divide(denominator).floatValue();
     }
 
+    @Override
     public int intValue() {
         return numerator.divide(denominator).intValue();
     }
 
+    @Override
     public long longValue() {
         return numerator.divide(denominator).longValue();
     }

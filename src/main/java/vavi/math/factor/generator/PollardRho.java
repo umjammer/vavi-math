@@ -27,6 +27,8 @@ public class PollardRho {
     /** */
     private final static SecureRandom random = new SecureRandom();
 
+    static final Map<BigInteger, Boolean> cache = new HashMap<>();
+
     /** */
     private BigInteger rho(BigInteger N) {
         BigInteger divisor;
@@ -49,9 +51,9 @@ public class PollardRho {
         return divisor;
     }
 
-    Map<BigInteger, Boolean> cache = new HashMap<>();
-
-    /** */
+    /**
+     * TODO slow (FactorUtilTest#test2 92%)
+     */
     public void factor(BigInteger n) {
         if (n.compareTo(BigInteger.ONE) == 0) {
             return;
@@ -61,7 +63,7 @@ public class PollardRho {
         if (cache.containsKey(n)) {
             p = cache.get(n);
         } else {
-            p = n.isProbablePrime(20); // TODO slow
+            p = n.isProbablePrime(20); // TODO slow (FactorUtilTest#test2 7%)
         }
         if (p) {
             c.accept(n);

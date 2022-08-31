@@ -8,16 +8,14 @@
 
   <groupId>vavi</groupId>
   <artifactId>vavi-math</artifactId>
-  <version>0.0.3</version>
+  <version>0.0.4</version>
 
   <name>Vavi Math Library</name>
   <organization>
-    <name></name>
+    <name>vavi</name>
   </organization>
   <url>https://github.com/umjammer/vavi-math</url>
-  <description>0.0.2
-
-    add memoization</description>
+  <description>Vavi Math Library</description>
   <scm>
     <url>https://github.com/umjammer/vavi-math</url>
   </scm>
@@ -27,9 +25,9 @@
 
   <distributionManagement>
     <repository>
-      <id>bintray</id>
-      <name>umjammer-maven</name>
-      <url>https://api.bintray.com/maven/umjammer/maven/vavi-memoization/;publish=1</url>
+      <id>github</id>
+      <name>GitHub umjammer Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/umjammer/vavi-math</url>
     </repository>
   </distributionManagement>
 
@@ -47,10 +45,9 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.0</version>
+        <version>3.0.0-M5</version>
         <configuration>
           <trimStackTrace>false</trimStackTrace>
-          <forkMode>once</forkMode>
           <argLine>
             -javaagent:${project.build.directory}/vavi-memoization-${project.version}.jar
             -Djava.util.logging.config.file=${project.build.testResources.testResource.directory}/logging.properties
@@ -85,7 +82,9 @@
       </plugin>
 
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-install-plugin</artifactId>
+        <version>3.0.0-M1</version>
         <executions>
           <execution>
             <id>install-library</id>
@@ -105,7 +104,9 @@
       </plugin>
 
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-deploy-plugin</artifactId>
+        <version>3.0.0-M2</version>
         <configuration>
           <skip>true</skip>
         </configuration>
@@ -138,13 +139,27 @@
             <argument>-Dversion=${project.version}</argument>
             <argument>-Dpackaging=jar</argument>
             <argument>-Dfile=${project.build.directory}/vavi-memoization-${project.version}.jar</argument>
-            <argument>-DrepositoryId=bintray</argument>
-            <argument>-Durl=https://api.bintray.com/maven/umjammer/maven/vavi-memoization</argument>
+            <argument>-DrepositoryId=github</argument>
+            <argument>-Durl=https://maven.pkg.github.com/umjammer/vavi-math</argument>
+            <argument>-s</argument>
+            <argument>${env.GITHUB_WORKSPACE}/settings.xml</argument>
           </arguments>
         </configuration>
       </plugin>
     </plugins>
   </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>5.8.2</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>
@@ -157,19 +172,16 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.3.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.3.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.platform</groupId>
       <artifactId>junit-platform-commons</artifactId>
-      <version>1.5.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

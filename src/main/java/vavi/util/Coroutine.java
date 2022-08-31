@@ -11,6 +11,11 @@ import java.util.Map;
 import java.util.Random;
 
 
+/**
+ * Coroutine.
+ *
+ * @author lethevert
+ */
 public class Coroutine {
 
     private final List<Thread> pool = new ArrayList<>();

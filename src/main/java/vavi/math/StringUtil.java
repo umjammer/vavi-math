@@ -53,7 +53,7 @@ public abstract class StringUtil {
     public static <T> String toSequence(Iterable<T> i) {
         StringBuilder sb = new StringBuilder("[");
         for (T e : i) {
-            sb.append(e + ", ");
+            sb.append(e).append(", ");
         }
         sb.setLength(sb.length() - 2);
         sb.append("]");
@@ -64,7 +64,7 @@ public abstract class StringUtil {
     public static <T> String toSequence(T[] i) {
         StringBuilder sb = new StringBuilder("[");
         for (T e : i) {
-            sb.append(e + ", ");
+            sb.append(e).append(", ");
         }
         sb.setLength(sb.length() - 2);
         sb.append("]");
@@ -75,7 +75,7 @@ public abstract class StringUtil {
     public static String toSequence(int[] i) {
         StringBuilder sb = new StringBuilder("[");
         for (int e : i) {
-            sb.append(e + ", ");
+            sb.append(e).append(", ");
         }
         sb.setLength(sb.length() - 2);
         sb.append("]");
@@ -86,7 +86,7 @@ public abstract class StringUtil {
     public static String toSequence(long[] i) {
         StringBuilder sb = new StringBuilder("[");
         for (long e : i) {
-            sb.append(e + ", ");
+            sb.append(e).append(", ");
         }
         sb.setLength(sb.length() - 2);
         sb.append("]");
@@ -114,21 +114,6 @@ public abstract class StringUtil {
         }
         return l;
     }
-
-//    private static <T> T valueOf(String s) {
-//        if (T instanceof Integer) return null;
-//    }
-
-    /** */
-//    public static <T> List<T> toList(String s) {
-//        s = s.replaceAll("[] ", "");
-//        String[] a = s.split(",");
-//        List<T> l = new ArrayList<>();
-//        for (String e : a) {
-//            l.add(valueOf(e));
-//        }
-//        return l;
-//    }
 
     private static final String[] underTwenties = {
         "one",

@@ -1,5 +1,5 @@
 /*
- * http://www.merriampark.com/comb.htm
+ * https://web.archive.org/web/20081104134258/http://www.merriampark.com/comb.htm
  */
 
 package vavi.math;
@@ -10,6 +10,8 @@ import java.util.Iterator;
 
 /**
  * Systematically generate combinations.
+ *
+ * @author Michael Gilleland
  */
 public class CombinationGenerator implements Iterator<int[]>, Iterable<int[]> {
     private int[] a;
@@ -55,7 +57,7 @@ public class CombinationGenerator implements Iterator<int[]>, Iterable<int[]> {
 
     /** Are there more combinations? */
     public boolean hasNext() {
-        return numLeft.compareTo(BigInteger.ZERO) == 1;
+        return numLeft.compareTo(BigInteger.ZERO) > 0;
     }
 
     /** Return total number of combinations */

@@ -8,6 +8,8 @@ package vavi.math.prime;
 
 import java.math.BigInteger;
 
+import static vavi.math.Util.TWO;
+
 
 /**
  * Util.
@@ -17,14 +19,11 @@ import java.math.BigInteger;
  */
 public abstract class Util {
 
-    /** */
-    private static final BigInteger TWO = BigInteger.valueOf(2);
-
     /** Fermat's little theorem */
     public static boolean isPrime(BigInteger q) {
         q = q.abs();
         if (q.equals(TWO)) { return true; }
-        if (q.compareTo(TWO) == -1 || q.and(BigInteger.ONE).equals(BigInteger.ZERO)) { return false; }
+        if (q.compareTo(TWO) < 0 || q.and(BigInteger.ONE).equals(BigInteger.ZERO)) { return false; }
         return TWO.modPow(q.subtract(BigInteger.ONE), q).equals(BigInteger.ONE);
     }
 }

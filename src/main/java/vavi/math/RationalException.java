@@ -7,8 +7,11 @@ package vavi.math;
 
 /**
  * RationalException.
+ *
+ * @author BLUEPIXY
  */
 public class RationalException extends Exception {
+
     public RationalException() {
         super();
     }
