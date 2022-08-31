@@ -20,9 +20,9 @@
 
 package vavi.util;
 
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
 
 /**
  * An iterator that yields its values one at a time. Subclasses must define a

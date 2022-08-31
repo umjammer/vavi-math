@@ -1,5 +1,5 @@
 /*
- * http://www.merriampark.com/perm.htm.
+ * https://web.archive.org/web/20110813073733/http://www.merriampark.com/perm.htm.
  */
 
 package vavi.math;
@@ -10,6 +10,8 @@ import java.util.Iterator;
 
 /**
  * Systematically generate permutations.
+ *
+ * @author Michael Gilleland
  */
 public class PermutationGenerator implements Iterator<int[]>, Iterable<int[]> {
 

@@ -7,6 +7,8 @@ package vavi.math;
 
 /**
  * Rational.
+ *
+ * @author BLUEPIXY
  */
 public class Rational extends Number implements Cloneable, Comparable<Rational> {
 
@@ -50,7 +52,7 @@ public class Rational extends Number implements Cloneable, Comparable<Rational> 
         return x;
     }
 
-    /** */
+    @Override
     public Rational clone() throws CloneNotSupportedException {
         try {
             return new Rational(numerator, denominator);

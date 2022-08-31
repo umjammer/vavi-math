@@ -1,5 +1,5 @@
 /*
- * http://www.dreamincode.net/code/snippet3489.htm
+ * https://web.archive.org/web/20090524011849/http://www.dreamincode.net/code/snippet3489.htm
  */
 
 package vavi.math;
