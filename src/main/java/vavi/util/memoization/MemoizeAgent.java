@@ -126,5 +126,3 @@ public class MemoizeAgent implements ClassFileTransformer {
         return false;
     }
 }
-
-/* */

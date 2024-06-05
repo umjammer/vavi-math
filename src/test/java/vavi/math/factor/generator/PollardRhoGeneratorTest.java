@@ -38,5 +38,3 @@ public class PollardRhoGeneratorTest {
         System.err.printf("%s: in %d ms\n", n, System.currentTimeMillis() - t);
     }
 }
-
-/* */

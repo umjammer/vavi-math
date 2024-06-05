@@ -40,5 +40,3 @@ public class RomanTest {
         System.err.println("Roman2: " + r + ": " + Roman2.toInt(r));
     }
 }
-
-/* */

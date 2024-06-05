@@ -70,5 +70,3 @@ public class DijkstraTest {
         new Dijkstra<>(graph).search();
     }
 }
-
-/* */

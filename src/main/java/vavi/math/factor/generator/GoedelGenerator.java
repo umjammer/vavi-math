@@ -72,5 +72,3 @@ public class GoedelGenerator extends Generator<Integer> {
         goedel(n);
     }
 }
-
-/* */

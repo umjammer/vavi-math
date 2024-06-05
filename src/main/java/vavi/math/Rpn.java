@@ -292,5 +292,3 @@ public class Rpn {
         return stack.peek().expr.trim();
     }
 }
-
-/* */

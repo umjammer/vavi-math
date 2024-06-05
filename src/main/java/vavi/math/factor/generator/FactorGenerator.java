@@ -117,5 +117,3 @@ public class FactorGenerator extends Generator<BigInteger> {
         factor(n);
     }
 }
-
-/* */

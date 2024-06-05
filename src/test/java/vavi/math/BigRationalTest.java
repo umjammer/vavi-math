@@ -34,5 +34,3 @@ public class BigRationalTest {
         assertEquals(new BigRational(100), new BigRational(100));
     }
 }
-
-/* */

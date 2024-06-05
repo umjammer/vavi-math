@@ -108,5 +108,3 @@ public class CombinationGenerator implements Iterator<int[]>, Iterable<int[]> {
         return this;
     }
 }
-
-/* */

@@ -25,5 +25,3 @@ public class PermutationGenerator2 extends Generator<int[]> {
         }
     }
 }
-
-/* */

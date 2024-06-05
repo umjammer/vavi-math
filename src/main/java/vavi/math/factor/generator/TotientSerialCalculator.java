@@ -181,5 +181,3 @@ public class TotientSerialCalculator {
         return (long) ((x / Math.log(x)) * (1 + (1.2762 / Math.log(x))));
     }
 }
-
-/* */

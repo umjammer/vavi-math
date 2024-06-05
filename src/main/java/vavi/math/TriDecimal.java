@@ -23,5 +23,3 @@ public class TriDecimal extends NDecimal {
         return toDecimal(nDecimal, 3);
     }
 }
-
-/* */

@@ -35,5 +35,3 @@ logger.info(r.toString());
         assertEquals(Integer.valueOf(6), r.get(BigInteger.valueOf(809)));
     }
 }
-
-/* */

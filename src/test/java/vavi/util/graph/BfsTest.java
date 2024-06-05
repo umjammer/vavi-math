@@ -111,5 +111,3 @@ System.err.println("B: " + parent.get(i) + ", " + b);
         bfs.search(); // breadth-first search
     }
 }
-
-/* */

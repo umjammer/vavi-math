@@ -73,5 +73,3 @@ public class Bfs<T> implements Searchable {
         return -1;
     }
 }
-
-/* */

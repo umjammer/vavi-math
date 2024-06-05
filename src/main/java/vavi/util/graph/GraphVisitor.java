@@ -21,4 +21,3 @@ public interface GraphVisitor<T> {
     /** */
     void atEnd(List<Vertex<T>> vertices);
 }
-/* */

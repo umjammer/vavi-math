@@ -23,5 +23,3 @@ public @interface Memoize {
     /** */
     boolean debug() default false;
 }
-
-/* */
