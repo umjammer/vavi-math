@@ -146,7 +146,7 @@ public abstract class Generator<T> implements Iterable<T> {
         }
     }
 
-    protected void yield(T value) {
+    protected void _yield(T value) {
         put(value);
     }
 

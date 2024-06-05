@@ -89,7 +89,7 @@ public class FactorGenerator extends Generator<BigInteger> {
         do {
             q = n.divide(d);
             while (n.equals(q.multiply(d))) {
-                yield(d);
+                _yield(d);
                 n = q;
                 q = n.divide(d);
             }
@@ -100,7 +100,7 @@ public class FactorGenerator extends Generator<BigInteger> {
         } while (d.compareTo(q) <= 0); // <=
 
         if (!n.equals(BigInteger.ONE) || n0.equals(BigInteger.ONE)) {
-            yield(n);
+            _yield(n);
         }
     }
 

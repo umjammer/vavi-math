@@ -30,7 +30,7 @@ public class SkippingSievePrimeGenerator extends Generator<Integer> {
         primes[0] = false;
         primes[1] = false;
         primes[2] = true;
-        yield(2);
+        _yield(2);
         int rootMP = (int) Math.floor(Math.sqrt(maxPrime));
 
         // get next prime
@@ -48,7 +48,7 @@ public class SkippingSievePrimeGenerator extends Generator<Integer> {
 
         for (int i = 3; i <= maxPrime; i += 2) {
             if (primes[i]) {
-                yield(i);
+                _yield(i);
             }
         }
     }

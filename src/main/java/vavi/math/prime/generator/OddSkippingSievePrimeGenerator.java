@@ -33,7 +33,7 @@ public class OddSkippingSievePrimeGenerator extends Generator<Integer> {
         Arrays.fill(primes, true);
         primes[0] = false; // this actually represents 1
         primes[1] = true; // this actually represents 3
-        yield(2);
+        _yield(2);
         int rootMP = (int) Math.floor(Math.sqrt(maxPrime));
         int halfMax = maxPrime / 2;
 
@@ -57,7 +57,7 @@ public class OddSkippingSievePrimeGenerator extends Generator<Integer> {
         // the index's represent odd numbers starting with 1
         for (int i = 0; i <= halfMax; i++) {
             if (primes[i]) {
-                yield((i * 2) + 1);
+                _yield((i * 2) + 1);
             }
         }
     }

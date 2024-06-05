@@ -21,7 +21,7 @@ public class PermutationGenerator2 extends Generator<int[]> {
     @Override
     public void run() {
         while (x.hasNext()) {
-            yield(x.next().clone());
+            _yield(x.next().clone());
         }
     }
 }

@@ -27,7 +27,7 @@ public class PollardRhoGenerator extends Generator<BigInteger> {
 
     /** */
     public PollardRhoGenerator(BigInteger n) {
-        pollardRho = new PollardRho(r -> yield(r));
+        pollardRho = new PollardRho(r -> _yield(r));
         this.n = n;
     }
 

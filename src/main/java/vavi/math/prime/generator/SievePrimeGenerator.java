@@ -40,7 +40,7 @@ public class SievePrimeGenerator extends Generator<Integer> {
 
         for (int i = 0; i < maxPrime; i++) {
             if (primes[i]) {
-                yield(i);
+                _yield(i);
             }
         }
     }
