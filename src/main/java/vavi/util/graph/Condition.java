@@ -20,5 +20,3 @@ interface Condition {
     /** */
     boolean isSatisfied(Collection<Integer> path);
 }
-
-/* */

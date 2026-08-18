@@ -149,5 +149,3 @@ public class Rational extends Number implements Cloneable, Comparable<Rational> 
         return ret;
     }
 }
-
-/* */

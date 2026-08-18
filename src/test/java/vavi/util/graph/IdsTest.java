@@ -66,5 +66,3 @@ public class IdsTest {
         System.out.println();
     }
 }
-
-/* */

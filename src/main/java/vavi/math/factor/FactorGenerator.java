@@ -138,5 +138,3 @@ public class FactorGenerator implements Iterator<BigInteger>, Iterable<BigIntege
         return factors.size();
     }
 }
-
-/* */

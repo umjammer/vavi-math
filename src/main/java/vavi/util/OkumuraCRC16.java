@@ -44,5 +44,3 @@ public class OkumuraCRC16 {
         return crc;
     }
 }
-
-/* */

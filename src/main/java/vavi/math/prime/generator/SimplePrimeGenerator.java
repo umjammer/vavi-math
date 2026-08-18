@@ -35,7 +35,7 @@ public class SimplePrimeGenerator extends Generator<Integer> {
             }
 
             if (isPrime) {
-                yield(i);
+                _yield(i);
             }
         }
     }

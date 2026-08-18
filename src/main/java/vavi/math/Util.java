@@ -340,5 +340,3 @@ public final class Util {
              qr[0] : qr[0].subtract(BigInteger.ONE);
     }
 }
-
-/* */

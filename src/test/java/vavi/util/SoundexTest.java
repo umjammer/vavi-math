@@ -40,5 +40,3 @@ public class SoundexTest {
             System.out.println(Soundex.soundex(names[i]) + ' ' + names[i]);
     }
 }
-
-/* */

@@ -40,5 +40,3 @@ public abstract class FactorUtil {
         return bi[0];
     }
 }
-
-/* */

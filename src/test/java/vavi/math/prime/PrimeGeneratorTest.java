@@ -31,5 +31,3 @@ public class PrimeGeneratorTest {
         assertEquals(actual, StringUtil.toSequence(new OddSkippingSievePrimeGenerator(10000)));
     }
 }
-
-/* */

@@ -226,4 +226,3 @@ class Roman2 {
         return number;
     }
 }
-/* */

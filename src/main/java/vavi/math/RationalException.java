@@ -20,5 +20,3 @@ public class RationalException extends Exception {
         super(msg);
     }
 }
-
-/* */

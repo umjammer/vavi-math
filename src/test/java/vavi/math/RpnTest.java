@@ -69,5 +69,3 @@ System.err.println("--- 3, 4 ---, " + result.length + ", " + (System.nanoTime() 
         assertEquals(5, result.length);
     }
 }
-
-/* */

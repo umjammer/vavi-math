@@ -29,7 +29,7 @@ public class BitSetOddSkippingSievePrimeGenerator extends Generator<Integer> {
 
         primes.set(0, false);
         primes.set(1, true);
-        yield(2);
+        _yield(2);
         int rootMP = (int) Math.floor(Math.sqrt(maxPrime));
         int halfMax = maxPrime / 2;
 
@@ -53,7 +53,7 @@ public class BitSetOddSkippingSievePrimeGenerator extends Generator<Integer> {
         // the index's represent odd numbers starting with 1
         for (int i = 0; i <= halfMax; i++) {
             if (primes.get(i)) {
-                yield((i * 2) + 1);
+                _yield((i * 2) + 1);
             }
         }
     }

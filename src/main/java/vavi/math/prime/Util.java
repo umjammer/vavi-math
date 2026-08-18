@@ -27,5 +27,3 @@ public abstract class Util {
         return TWO.modPow(q.subtract(BigInteger.ONE), q).equals(BigInteger.ONE);
     }
 }
-
-/* */

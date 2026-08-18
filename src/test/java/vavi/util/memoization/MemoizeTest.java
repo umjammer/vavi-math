@@ -102,5 +102,3 @@ public class MemoizeTest {
         assertEquals(1556111435, fib(1000));
     }
 }
-
-/* */

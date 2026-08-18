@@ -52,5 +52,3 @@ public class GoedelGeneratorTest {
         System.err.println(StringUtil.toSequence(goedels).equals(actual) + ", in " + (System.currentTimeMillis() - t) + " ms");
     }
 }
-
-/* */

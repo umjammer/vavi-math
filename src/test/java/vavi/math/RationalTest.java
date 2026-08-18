@@ -36,5 +36,3 @@ public class RationalTest {
         assertEquals(new Rational(100), new Rational(100));
     }
 }
-
-/* */

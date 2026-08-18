@@ -52,7 +52,7 @@ public class GoedelGenerator extends Generator<Integer> {
                 n = q;
                 q = n.divide(d);
             }
-            yield(goedel);
+            _yield(goedel);
 //System.err.println(d + ", " + goedel);
             goedel = 0;
             d = new BigInteger(String.valueOf(i.next()));
@@ -72,5 +72,3 @@ public class GoedelGenerator extends Generator<Integer> {
         goedel(n);
     }
 }
-
-/* */

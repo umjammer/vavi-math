@@ -31,7 +31,7 @@ class GeneratorTest {
             @Override
             public void run() {
                 for (int i = 0; i < 100; i++) {
-                    yield(i);
+                    _yield(i);
                 }
             }
         };
@@ -47,7 +47,7 @@ class GeneratorTest {
                 int a = 0, b = 1;
                 while (true) {
                     a = b + (b = a);
-                    yield(a);
+                    _yield(a);
                 }
             }
         };
@@ -59,5 +59,3 @@ class GeneratorTest {
         }
     }
 }
-
-/* */

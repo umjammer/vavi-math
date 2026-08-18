@@ -58,5 +58,3 @@ public class NDecimal {
         return v;
     }
 }
-
-/* */

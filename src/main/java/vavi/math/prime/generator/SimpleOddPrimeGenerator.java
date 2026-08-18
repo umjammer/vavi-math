@@ -17,7 +17,7 @@ public class SimpleOddPrimeGenerator extends Generator<Integer> {
 
     private void getPrimes(int maxPrime) {
 
-        yield(2);
+        _yield(2);
 
         /*
          * cycle through checking if a numbers prime. To save time, only check
@@ -36,7 +36,7 @@ public class SimpleOddPrimeGenerator extends Generator<Integer> {
             }
 
             if (isPrime) {
-                yield(i);
+                _yield(i);
             }
         }
     }
