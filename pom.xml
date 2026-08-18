@@ -30,26 +30,89 @@
     </repository>
   </distributionManagement>
 
+  <profiles>
+    <profile>
+      <id>local (not on jitpack)</id>
+      <activation>
+        <property>
+          <name>env.GITHUB_WORKFLOW</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-deploy-plugin</artifactId>
+            <version>3.1.1</version>
+            <executions>
+              <execution>
+                <id>default-deploy</id>
+                <configuration>
+                  <skip>true</skip> <!-- use exec-maven-plugin instead of this -->
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <!--
+              because of maven deploy-file uploads source, jar also
+              TODO maven-metadata.xml!/metadata/versioning/latest is not updated
+              TODO how about https://stackoverflow.com/a/37552776/6102938
+             -->
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+              <execution>
+                <id>deploy-library</id>
+                <phase>deploy</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <executable>mvn</executable>
+              <arguments>
+                <argument>deploy:deploy-file</argument>
+                <argument>-DgroupId=${project.groupId}</argument>
+                <argument>-DartifactId=vavi-memoization</argument>
+                <argument>-Dversion=${project.version}</argument>
+                <argument>-Dpackaging=jar</argument>
+                <argument>-Dfile=${project.build.directory}/vavi-memoization-${project.version}.jar</argument>
+                <argument>-DrepositoryId=github</argument>
+                <argument>-Durl=https://maven.pkg.github.com/umjammer/vavi-math</argument>
+                <argument>-s</argument>
+                <argument>${env.GITHUB_WORKSPACE}/settings.xml</argument>
+              </arguments>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
   <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.10.1</version>
+        <version>3.12.1</version>
         <configuration>
-          <source>17</source>
+          <release>17</release>
         </configuration>
       </plugin>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M7</version>
+        <version>3.2.5</version>
         <configuration>
           <trimStackTrace>false</trimStackTrace>
           <argLine>
             -javaagent:${project.build.directory}/vavi-memoization-${project.version}.jar
-            -Djava.util.logging.config.file=${project.build.testResources.testResource.directory}/logging.properties
+            -Djava.util.logging.config.file=${project.build.testOutputDirectory}/logging.properties
           </argLine>
         </configuration>
       </plugin>
@@ -75,6 +138,7 @@
                               excludes="META-INF/**"/>
                 </jar>
               </target>
+              <failOnError>true</failOnError>
             </configuration>
           </execution>
         </executions>
@@ -83,7 +147,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-install-plugin</artifactId>
-        <version>3.0.0-M1</version>
+        <version>3.1.2</version>
         <executions>
           <execution>
             <id>install-library</id>
@@ -101,59 +165,22 @@
           </execution>
         </executions>
       </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <version>3.0.0-M2</version>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <!--
-          because of maven deploy-file uploads source, jar also
-          TODO maven-metadata.xml!/metadata/versioning/latest is not updated
-          TODO how about https://stackoverflow.com/a/37552776/6102938
-         -->
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.6.0</version>
-        <executions>
-          <execution>
-            <id>deploy-library</id>
-            <phase>deploy</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <executable>mvn</executable>
-          <arguments>
-            <argument>deploy:deploy-file</argument>
-            <argument>-DgroupId=${project.groupId}</argument>
-            <argument>-DartifactId=vavi-memoization</argument>
-            <argument>-Dversion=${project.version}</argument>
-            <argument>-Dpackaging=jar</argument>
-            <argument>-Dfile=${project.build.directory}/vavi-memoization-${project.version}.jar</argument>
-            <argument>-DrepositoryId=github</argument>
-            <argument>-Durl=https://maven.pkg.github.com/umjammer/vavi-math</argument>
-            <argument>-s</argument>
-            <argument>${env.GITHUB_WORKSPACE}/settings.xml</argument>
-          </arguments>
-        </configuration>
-      </plugin>
     </plugins>
   </build>
+
+  <repositories>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+  </repositories>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>org.junit</groupId>
         <artifactId>junit-bom</artifactId>
-        <version>5.9.1</version>
+        <version>6.0.3</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -164,7 +191,7 @@
     <dependency>
       <groupId>org.javassist</groupId>
       <artifactId>javassist</artifactId>
-      <version>3.23.1-GA</version> <!-- 3.24.0-GA ~ for java11 -->
+      <version>3.32.0-GA</version>
       <scope>provided</scope> <!-- don't touch to avoid not showing this as a dependency at another project -->
     </dependency>
 
@@ -181,6 +208,13 @@
     <dependency>
       <groupId>org.junit.platform</groupId>
       <artifactId>junit-platform-commons</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.umjammer</groupId>
+      <artifactId>vavi-commons</artifactId>
+      <version>1.1.19</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
