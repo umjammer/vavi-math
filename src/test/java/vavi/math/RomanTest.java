@@ -7,6 +7,14 @@
 package vavi.math;
 
 
+import java.util.stream.Stream;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static vavi.math.Roman3.romanToInt;
+
+
 /**
  * Integer to Roman converter.
  *
@@ -38,5 +46,13 @@ public class RomanTest {
         System.err.println("Roman2: " + r + ": " + Roman2.toInt(r));
         r = "MMVII";
         System.err.println("Roman2: " + r + ": " + Roman2.toInt(r));
+    }
+
+    @Test
+    void test2() throws Exception {
+        assertEquals(168, romanToInt("CLXVIII"));
+        assertEquals(1994, romanToInt("MCMXCIV"));
+        assertEquals(2024, romanToInt("MMXXIV"));
+        assertEquals(3888, romanToInt("MMMDCCCLXXXVIII"));
     }
 }
