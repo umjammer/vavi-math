@@ -17,23 +17,24 @@ import java.util.Set;
 import vavi.math.Util;
 
 import static java.math.BigInteger.ONE;
+import static java.math.BigInteger.TWO;
 import static java.math.BigInteger.ZERO;
 
 
 /**
  * factorization.
  *
- * TODO it takes about 5~7 seconds (python3 returns immediately).
- * TODO BigInteger#gcd, modPow uses mostly of time
- *
- * java9 has {@link BigInteger#TWO}, {@link BigInteger#sqrt()}
+ * <ul>
+ * <li><delete>it takes about 5~7 seconds (python3 returns immediately).</delete></li>
+ * <li><delete>BigInteger#gcd, modPow uses mostly of time</delete></li>
+ * <li><delete>java9 has {@link BigInteger#TWO}, {@link BigInteger#sqrt()}</delete></li>
+ * </ul>
  */
 public class Factorizor {
 
     /** */
     private final static SecureRandom random = new SecureRandom();
 
-    private final static BigInteger TWO = new BigInteger("2");
     private final static BigInteger THREE = new BigInteger("3");
     private final static BigInteger FOUR = new BigInteger("4");
     private final static BigInteger SIX = new BigInteger("6");
@@ -77,7 +78,7 @@ public class Factorizor {
     private static final Set<BigInteger> smallPrimeSet = primesBelow(OHT);
 
     // http://en.wikipedia.org/wiki/Miller-Rabin_primality_test#Algorithm_and_running_time
-    private static boolean isPrime(BigInteger n, int precision/*=7*/) {
+    private static boolean isPrime(BigInteger n, int precision /* = 7 */) {
         if (n.compareTo(ONE) < 0) {
             throw new IllegalArgumentException("Out of bounds, first argument must be > 0");
         } else if (n.compareTo(THREE) <= 0) {
@@ -196,7 +197,7 @@ public class Factorizor {
         return factors;
     }
 
-    private static Map<BigInteger, BigInteger> totients = new HashMap<>();
+    private static final Map<BigInteger, BigInteger> totients = new HashMap<>();
 
     public static BigInteger totient(BigInteger n) {
         if (Objects.equals(n, ZERO)) { return ONE; }
@@ -215,9 +216,47 @@ public class Factorizor {
         return tot;
     }
 
+    /** @see "https://claude.ai/chat/ebd13e0d-fa3d-47ed-8510-fd7d038d4612" */
+    public static BigInteger fastGcd(BigInteger a, BigInteger b) {
+        if (b.equals(BigInteger.ZERO)) {
+            return a;
+        }
+        return fastGcd(b, a.mod(b));
+    }
+
+    /** @see "https://claude.ai/chat/ebd13e0d-fa3d-47ed-8510-fd7d038d4612" */
+    public static BigInteger binaryGcd(BigInteger a, BigInteger b) {
+        if (b.equals(BigInteger.ZERO)) {
+            return a;
+        }
+        if (a.equals(BigInteger.ZERO)) {
+            return b;
+        }
+
+        // If both a and b are even, then gcd(a,b) = 2*gcd(a/2, b/2)
+        if (!a.testBit(0) && !b.testBit(0)) {
+            return binaryGcd(a.shiftRight(1), b.shiftRight(1)).shiftLeft(1);
+        }
+        // If a is even and b is odd, then gcd(a,b) = gcd(a/2, b)
+        else if (!a.testBit(0)) {
+            return binaryGcd(a.shiftRight(1), b);
+        }
+        // If b is even and a is odd, then gcd(a,b) = gcd(a, b/2)
+        else if (!b.testBit(0)) {
+            return binaryGcd(a, b.shiftRight(1));
+        }
+        // If both a and b are odd, then:
+        // gcd(a,b) = gcd((max(a,b)-min(a,b))/2, min(a,b))
+        else if (a.compareTo(b) >= 0) {
+            return binaryGcd(a.subtract(b).shiftRight(1), b);
+        } else {
+            return binaryGcd(b.subtract(a).shiftRight(1), a);
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         for (int i = 10; i < 100; i++) {
-            System.err.println(i + ": " + primesBelow(BigInteger.valueOf(i)).toString());
+            System.err.println(i + ": " + primesBelow(BigInteger.valueOf(i)));
         }
     }
 }

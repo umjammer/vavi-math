@@ -27,7 +27,10 @@ public class FactorUtilTest {
         assertEquals(6857, FactorUtil.maxFactor(new BigInteger("600851475143")).intValue());
     }
 
-    // TODO slow, takes about 40sec
+    /**
+     * TODO slow, takes about 40sec
+     * @see vavi.math.factor.generator.FactorizorTest
+     */
     @Test
     @DisabledIfEnvironmentVariable(named = "GITHUB_WORKFLOW", matches = ".*")
     @DisabledIfEnvironmentVariable(named = "JITPACK", matches = ".*")
