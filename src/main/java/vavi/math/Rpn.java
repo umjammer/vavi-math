@@ -29,10 +29,31 @@ public class Rpn {
 
     /** */
     public enum Op {
-        ADD(OP_ADD),
-        SUBTRACT(OP_SUBTRACT),
-        MULTIPLY(OP_MULTIPLY),
-        DIVIDE(OP_DIVIDE);
+        ADD(OP_ADD){
+            @Override
+            void exec(Deque<Number> stack) {
+                Number a = stack.pop();
+                Number b = stack.pop();
+            }
+        },
+        SUBTRACT(OP_SUBTRACT){
+            @Override
+            void exec(Deque<Number> stack) {
+
+            }
+        },
+        MULTIPLY(OP_MULTIPLY){
+            @Override
+            void exec(Deque<Number> stack) {
+
+            }
+        },
+        DIVIDE(OP_DIVIDE){
+            @Override
+            void exec(Deque<Number> stack) {
+
+            }
+        };
         String string;
         Op(String string) {
             this.string = string;
@@ -40,6 +61,7 @@ public class Rpn {
         public String toString() {
             return string;
         }
+        abstract void exec(Deque<Number> stack);
     }
 
     /**
@@ -181,7 +203,7 @@ public class Rpn {
     public static final char OP = '@';
 
     /**
-     * http://www.ozzu.com/programming-forum/math-programming-question-t59970.html
+     * see "https://www.ozzu.com/forum/317990/math-programming-question"
      * not thread safe...
      */
     public static char[][] generatePattern(int ops, int nums) {
